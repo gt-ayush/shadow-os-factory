@@ -1,7 +1,7 @@
 # config/common - common options for live-build(7)
 
 # Version of live-build used to build config (config format version)
-LB_CONFIGURATION_VERSION="20250814+kali2"
+LB_CONFIGURATION_VERSION="20250505+deb13u1"
 
 # Set package manager
 LB_APT="apt"
@@ -13,7 +13,7 @@ LB_APT_HTTP_PROXY=""
 LB_APT_PIPELINE=""
 
 # Set apt/aptitude recommends
-LB_APT_RECOMMENDS="false"
+LB_APT_RECOMMENDS="true"
 
 # Set apt/aptitude security
 LB_APT_SECURE="true"

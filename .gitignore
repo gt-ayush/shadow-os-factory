@@ -1,0 +1,121 @@
+# =========================
+
+# LIVE-BUILD CORE ARTIFACTS
+
+# =========================
+
+# Build state directories
+
+.build/
+cache/
+tmp/
+
+# Generated root filesystems
+
+binary/
+chroot/
+
+# Live image outputs
+
+live-image-*
+*.iso
+*.img
+*.hybrid.iso
+
+# Filesystem metadata
+
+*.contents
+*.files
+*.packages
+
+# SquashFS
+
+live/filesystem.squashfs
+live/filesystem.manifest
+live/filesystem.packages
+
+# =========================
+
+# LIVE-BUILD GENERATED CONFIG (DO NOT TRACK)
+
+# =========================
+
+config/bootstrap
+config/common
+config/binary
+config/chroot
+
+# =========================
+
+# PACKAGE CACHE & DEBS
+
+# =========================
+
+archives/*.deb
+packages.chroot/
+packages.binary/
+
+# =========================
+
+# LOG FILES
+
+# =========================
+
+*.log
+shadow-build.log
+wget-log*
+debootstrap.log
+
+# =========================
+
+# TEMP / EDITOR / SYSTEM
+
+# =========================
+
+*.swp
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db
+
+# =========================
+
+# OPTIONAL LARGE FILES
+
+# =========================
+
+*.zip
+*.tar
+*.gz
+*.xz
+*.7z
+
+# =========================
+
+# ONLY SOURCE CONFIG
+
+# =========================
+
+!config/
+!config/package-lists/
+!config/includes.chroot/
+!config/hooks/
+!config/archives/
+
+# Allow assets (branding)
+
+!config/includes.chroot/usr/share/
+!config/includes.chroot/usr/share/wallpapers/
+!config/includes.chroot/usr/share/icons/
+!config/includes.chroot/usr/share/themes/
+
+# =========================
+
+# IMPORTANT PROJECT FILES
+
+# =========================
+
+!build.sh
+!.gitignore
+!README.md
