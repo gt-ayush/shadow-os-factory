@@ -1,0 +1,17 @@
+# Networking & security
+wireshark
+nmap
+dnsutils
+net-tools
+
+# Debugging
+gdb
+strace
+hexer
+
+# Development
+build-essential
+golang-go
+python3-pip
+libssl-dev
+linux-headers-amd64

@@ -1,0 +1,11 @@
+live-boot
+live-config
+systemd-sysv
+sudo
+network-manager
+wpasupplicant
+curl
+wget
+fail2ban
+apparmor
+apparmor-utils
