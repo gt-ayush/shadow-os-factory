@@ -1,0 +1,11 @@
+Shadow OS 0.3 Alpha
+
+Edition: Research
+Base: Debian Trixie
+Kernel: Linux 6.x
+Desktop: KDE Plasma 6
+
+Build: 2026.04
+Architecture: amd64
+
+Maintainer: Ayush Kumar Gupta

@@ -9,3 +9,8 @@ wget
 fail2ban
 apparmor
 apparmor-utils
+pipewire
+wireplumber
+plymouth
+plymouth-themes
+fastfetch

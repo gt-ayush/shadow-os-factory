@@ -1,0 +1,23 @@
+{
+  "logo": {
+  "type": "ascii",
+  "source": "/usr/share/shadow/shadow.txt"
+},
+
+  "display": {
+    "separator": " → "
+  },
+
+  "modules": [
+    "title",
+    "os",
+    "kernel",
+    "uptime",
+    "packages",
+    "shell",
+    "terminal",
+    "cpu",
+    "gpu",
+    "memory"
+  ]
+}

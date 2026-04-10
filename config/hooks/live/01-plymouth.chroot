@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Setting Plymouth theme..."
+
+update-alternatives --set default.plymouth /usr/share/plymouth/themes/shadow/shadow.plymouth
+
+update-initramfs -u

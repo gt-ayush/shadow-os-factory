@@ -130,6 +130,7 @@ evolution-data-server-common	3.56.2-0+deb13u1
 exfatprogs	1.2.9-1+deb13u1
 fail2ban	1.1.0-8
 fakeroot	1.37.1.1-1
+fastfetch	2.40.4+dfsg-1
 fdisk	2.41-5
 ffmpegthumbs	4:25.04.0-2
 filelight	4:25.04.2-1
@@ -175,6 +176,7 @@ firmware-sof-signed	2025.01-1
 firmware-zd1211	1:1.5-13
 fontconfig	2.15.0-2.3
 fontconfig-config	2.15.0-2.3
+fonts-cantarell	0.303.1-4
 fonts-crosextra-caladea	20200211-2
 fonts-crosextra-carlito	20230309-2
 fonts-dejavu	2.37-8
@@ -1814,6 +1816,7 @@ libxxhash0:amd64	0.8.3-2
 libyajl2:amd64	2.1.0-5+b2
 libyaml-0-2:amd64	0.2.5-2
 libyuv0:amd64	0.0.1904.20250204-1
+libyyjson0:amd64	0.10.0+ds-1+b1
 libz3-4:amd64	4.13.3-1
 libzbar0t64:amd64	0.23.93-8
 libze1:amd64	1.20.6-1
@@ -1950,6 +1953,7 @@ plasma-workspace-doc	4:6.3.6-2
 plasma5-integration	6.3.6-1
 plymouth	24.004.60-5
 plymouth-label	24.004.60-5
+plymouth-themes	24.004.60-5
 pnp.ids	0.394-1
 pocketsphinx-en-us	0.8+5prealpha+1-15
 polkit-kde-agent-1	4:6.3.6-1
