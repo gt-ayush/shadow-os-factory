@@ -1892,7 +1892,7 @@ okular-data	4:25.04.2-1
 okular-doc	4:25.04.2-1
 openjdk-21-jre:amd64	21.0.10+7-1~deb13u1
 openjdk-21-jre-headless:amd64	21.0.10+7-1~deb13u1
-openssh-client	1:10.0p1-7+deb13u1
+openssh-client	1:10.0p1-7+deb13u2
 openssl	3.5.5-1~deb13u2
 openssl-provider-legacy	3.5.5-1~deb13u2
 oxygen-sounds	4:6.3.4-1

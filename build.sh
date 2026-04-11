@@ -20,8 +20,8 @@ sudo lb build 2>&1 | tee shadow-build.log
 
 # 3. Check if successful
 if [ -f "live-image-amd64.hybrid.iso" ]; then
-    mv live-image-amd64.hybrid.iso shadow-os-v1-alpha\ 0.3.iso
-    echo "Success: shadow-os-v1-alpha 0.3.iso created."
+    mv live-image-amd64.hybrid.iso shadow-os-alpha\ V0.0.4.iso
+    echo "Success: shadow-os-v1-alpha 0.4.iso created."
 else
     echo "Error: Build failed. Check shadow-build.log"
 fi

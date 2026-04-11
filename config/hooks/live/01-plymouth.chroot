@@ -2,6 +2,6 @@
 
 echo "Setting Plymouth theme..."
 
-update-alternatives --set default.plymouth /usr/share/plymouth/themes/shadow/shadow.plymouth
+update-alternatives --set default.plymouth /usr/share/plymouth/themes/shadow/moonlight.plymouth
 
 update-initramfs -u
