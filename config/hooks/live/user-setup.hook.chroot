@@ -1,3 +1,13 @@
 #!/bin/bash
-adduser user sudo || true
+
+# Create live user
+useradd -m -s /bin/bash user
+
+# Set password (optional)
+echo "user:user" | chpasswd
+
+# Add to sudo group
+usermod -aG sudo user
+
+# Enable display manager
 systemctl enable sddm

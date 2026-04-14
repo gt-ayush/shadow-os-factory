@@ -1,7 +1,18 @@
-
 #!/bin/bash
 
+set -e
+
+# Use temp dir to reduce RAM pressure
+export TMPDIR=$HOME/tmp
+mkdir -p $TMPDIR
+
+# Limit CPU usage (important for 16GB RAM)
+export MAKEFLAGS="-j2"
+
+echo "🧹 Cleaning previous build..."
 sudo lb clean --purge
+
+echo "⚙️ Configuring live-build..."
 
 lb config \
     --mode debian \
@@ -15,13 +26,13 @@ lb config \
     --apt-recommends true \
     --backports true
 
-# 2. Build the ISO and log the output
+echo "🏗️ Building ISO..."
+
 sudo lb build 2>&1 | tee shadow-build.log
 
-# 3. Check if successful
 if [ -f "live-image-amd64.hybrid.iso" ]; then
-    mv live-image-amd64.hybrid.iso shadow-os-alpha\ V0.0.4.iso
-    echo "Success: shadow-os-v1-alpha 0.4.iso created."
+    mv live-image-amd64.hybrid.iso "shadow-os-alpha-v0.0.5.iso"
+    echo "✅ SUCCESS: ISO created!"
 else
-    echo "Error: Build failed. Check shadow-build.log"
+    echo "❌ ERROR: Build failed. Check shadow-build.log"
 fi

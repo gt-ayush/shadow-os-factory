@@ -1,0 +1,9 @@
+#!/bin/bash
+
+echo "Fixing home permissions..."
+
+# Wait a bit (live system timing issue safety)
+sleep 2
+
+chown -R user:user /home/user
+chmod -R u+rw /home/user

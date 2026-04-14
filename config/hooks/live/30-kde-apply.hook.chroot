@@ -1,0 +1,9 @@
+#!/bin/bash
+
+mkdir -p /etc/xdg
+
+# Copy your configs as system defaults
+cp /etc/skel/.config/kdeglobals /etc/xdg/
+cp /etc/skel/.config/plasmarc /etc/xdg/
+cp /etc/skel/.config/ksplashrc /etc/xdg/ 2>/dev/null || true
+cp /etc/skel/.config/kwinrc /etc/xdg/ 2>/dev/null || true

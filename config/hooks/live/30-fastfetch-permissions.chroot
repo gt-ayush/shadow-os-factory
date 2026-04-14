@@ -1,0 +1,2 @@
+#!/bin/bash
+chmod 644 /etc/fastfetch/config.jsonc

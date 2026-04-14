@@ -225,7 +225,7 @@ gdb	16.3-1
 ghostscript	10.05.1~dfsg-1+deb13u1
 gir1.2-atk-1.0:amd64	2.56.2-1+deb13u1
 gir1.2-freedesktop:amd64	1.84.0-1
-gir1.2-gdkpixbuf-2.0:amd64	2.42.12+dfsg-4
+gir1.2-gdkpixbuf-2.0:amd64	2.42.12+dfsg-4+deb13u1
 gir1.2-girepository-2.0:amd64	1.84.0-1
 gir1.2-glib-2.0:amd64	2.84.4-3~deb13u2
 gir1.2-gtk-3.0:amd64	3.24.49-3
@@ -667,9 +667,9 @@ libgcrypt20:amd64	1.11.0-7
 libgd3:amd64	2.3.3-13
 libgdbm-compat4t64:amd64	1.24-2
 libgdbm6t64:amd64	1.24-2
-libgdk-pixbuf-2.0-0:amd64	2.42.12+dfsg-4
-libgdk-pixbuf2.0-bin	2.42.12+dfsg-4
-libgdk-pixbuf2.0-common	2.42.12+dfsg-4
+libgdk-pixbuf-2.0-0:amd64	2.42.12+dfsg-4+deb13u1
+libgdk-pixbuf2.0-bin	2.42.12+dfsg-4+deb13u1
+libgdk-pixbuf2.0-common	2.42.12+dfsg-4+deb13u1
 libgfortran5:amd64	14.2.0-19
 libgif7:amd64	5.2.2-1+b1
 libgirepository-1.0-1:amd64	1.84.0-1
