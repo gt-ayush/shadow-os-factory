@@ -4,5 +4,5 @@ Description=A theme that features a Dear logo in concentrics circles with pulsin
 ModuleName=script
 
 [script]
-ImageDir=/usr/share/plymouth/themes/shadow
-ScriptFile=/usr/share/plymouth/themes/shadow/moonlight.script
+ImageDir=/usr/share/plymouth/themes/shadow/
+ScriptFile=/usr/share/plymouth/themes/shadow/shadow.script

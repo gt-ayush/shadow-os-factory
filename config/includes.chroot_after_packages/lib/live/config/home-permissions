@@ -1,9 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
-echo "Fixing home permissions..."
-
-# Wait a bit (live system timing issue safety)
-sleep 2
-
-chown -R user:user /home/user
-chmod -R u+rw /home/user
+chown -R "$LIVE_USERNAME:$LIVE_USERNAME" "/home/$LIVE_USERNAME"
+chmod -R u+rwX "/home/$LIVE_USERNAME"

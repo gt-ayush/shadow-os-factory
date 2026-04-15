@@ -1953,6 +1953,7 @@ plasma-workspace-doc	4:6.3.6-2
 plasma5-integration	6.3.6-1
 plymouth	24.004.60-5
 plymouth-label	24.004.60-5
+plymouth-theme-breeze	6.3.4-1
 plymouth-themes	24.004.60-5
 pnp.ids	0.394-1
 pocketsphinx-en-us	0.8+5prealpha+1-15
@@ -2189,7 +2190,7 @@ x11-xkb-utils	7.7+9
 x11-xserver-utils	7.7+11
 xauth	1:1.1.2-1.1
 xcvt	0.1.3-1
-xdg-dbus-proxy	0.1.6-1
+xdg-dbus-proxy	0.1.6-1+deb13u1
 xdg-desktop-portal	1.20.3+ds-1
 xdg-desktop-portal-gtk	1.15.3-1
 xdg-desktop-portal-kde	6.3.5-1

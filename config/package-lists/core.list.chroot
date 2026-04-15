@@ -11,6 +11,4 @@ apparmor
 apparmor-utils
 pipewire
 wireplumber
-plymouth
-plymouth-themes
 fastfetch

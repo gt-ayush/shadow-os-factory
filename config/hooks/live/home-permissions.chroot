@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Fix ownership
-chown -R user:user /home/user
-
-# Ensure writable configs
-chmod -R u+rwX /home/user

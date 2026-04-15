@@ -2,11 +2,9 @@
 
 echo "Setting Plymouth theme..."
 
-update-alternatives --install \
-  /usr/share/plymouth/themes/default.plymouth default.plymouth \
-  /usr/share/plymouth/themes/shadow/moonlight.plymouth 100
+# Ensure plymouth is installed (safe)
+apt-get update
+apt-get install -y plymouth plymouth-themes
 
-update-alternatives --set default.plymouth \
-  /usr/share/plymouth/themes/shadow/moonlight.plymouth
-
-update-initramfs -u
+# Set your theme
+plymouth-set-default-theme shadow -R || true
