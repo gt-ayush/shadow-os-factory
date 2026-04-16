@@ -31,7 +31,7 @@ echo "🏗️ Building ISO..."
 sudo lb build 2>&1 | tee shadow-build.log
 
 if [ -f "live-image-amd64.hybrid.iso" ]; then
-    mv live-image-amd64.hybrid.iso "shadow-os-alpha-v0.0.6.iso"
+    mv live-image-amd64.hybrid.iso "shadow-os-alpha-v0.0.7.iso"
     echo "✅ SUCCESS: ISO created!"
 else
     echo "❌ ERROR: Build failed. Check shadow-build.log"
