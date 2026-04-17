@@ -1,8 +1,8 @@
 NAME="Shadow OS"
-VERSION="V0.0.7-Alpha (Trixie)"
+VERSION="V0.0.8-Alpha (Trixie)"
 ID=shadow
 ID_LIKE=debian
-PRETTY_NAME="Shadow-OS-V0.0.7-Alpha"
+PRETTY_NAME="Shadow-OS-V0.0.8-Alpha"
 VERSION_ID="1.0"
 VERSION_CODENAME=shadow
 BUILD_ID="2026.04"
@@ -12,4 +12,4 @@ SUPPORT_URL="https://shadow-os.x/support"
 BUG_REPORT_URL="https://shadow-os.x/bugs"
 
 ANSI_COLOR="1;35"
-LOGO=debian-logo
+LOGO=shadow

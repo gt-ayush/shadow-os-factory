@@ -136,6 +136,9 @@ ForegroundVisited=155,89,182
 [Icons]
 Theme=breeze-dark
 
+[General]
+ColorScheme=BreezeDark
+
 [KDE]
 LookAndFeelPackage=org.kde.breezedark.desktop
 

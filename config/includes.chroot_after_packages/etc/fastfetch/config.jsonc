@@ -1,7 +1,7 @@
 {
   "logo": {
   "type": "file",
-  "source": "/usr/share/shadow/shadow.txt"
+  "source": "/usr/share/shadow/logo.txt"
 },
 
   "display": {
