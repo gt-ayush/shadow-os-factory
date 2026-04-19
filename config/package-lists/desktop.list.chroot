@@ -1,6 +1,9 @@
 kde-standard
-sddm
+plasma-workspace
+plasma-desktop
+plasma-pa
 plasma-nm
+sddm
 bluedevil
 konsole
 dolphin

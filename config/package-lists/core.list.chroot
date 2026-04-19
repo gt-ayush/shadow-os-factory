@@ -12,3 +12,4 @@ apparmor-utils
 pipewire
 wireplumber
 fastfetch
+libxcb-cursor0

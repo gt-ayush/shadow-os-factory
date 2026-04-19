@@ -1,0 +1,16 @@
+{
+  "KPlugin": {
+    "Id": "com.shadow.desktop",
+    "Name": "Shadow OS",
+    "Description": "Shadow KDE Theme",
+    "Category": "Look and Feel",
+    "Version": "1.0",
+    "License": "GPL",
+    "Authors": [
+      {
+        "Name": "Ayush"
+      }
+    ]
+  },
+  "X-Plasma-MainScript": "contents/layouts/org.kde.plasma.desktop-layout.js"
+}

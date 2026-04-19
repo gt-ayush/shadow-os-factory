@@ -1,0 +1,4 @@
+#!/bin/bash
+
+su - "$LIVE_USERNAME" -c "kquitapp6 plasmashell || true"
+su - "$LIVE_USERNAME" -c "lookandfeeltool -a com.shadow.desktop"

@@ -140,7 +140,7 @@ Theme=breeze-dark
 ColorScheme=BreezeDark
 
 [KDE]
-LookAndFeelPackage=org.kde.breezedark.desktop
+LookAndFeelPackage=com.shadow.desktop
 
 [KFileDialog Settings]
 Allow Expansion=false
