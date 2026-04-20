@@ -1,18 +1,26 @@
 #!/bin/bash
 
-echo "Applying Shadow KDE layout..."
+echo "Applying Shadow KDE full config..."
 
 USER_HOME="/home/$LIVE_USERNAME"
+SKEL_CONFIG="/etc/skel/.config"
 
-# Make sure config dir exists
+# Ensure user home exists
+[ -d "$USER_HOME" ] || exit 0
+
+# Create config directory
 mkdir -p "$USER_HOME/.config"
 
-# Copy layout
-cp -f /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc \
-      "$USER_HOME/.config/"
+# Copy ALL KDE configs safely
+if [ -d "$SKEL_CONFIG" ]; then
+    cp -rT "$SKEL_CONFIG" "$USER_HOME/.config"
+fi
 
 # Fix ownership
-chown -R $LIVE_USERNAME:$LIVE_USERNAME "$USER_HOME/.config"
+chown -R "$LIVE_USERNAME:$LIVE_USERNAME" "$USER_HOME/.config"
 
+# Prevent KDE from resetting layout
 touch "$USER_HOME/.config/plasma-initialized"
-chown $LIVE_USERNAME:$LIVE_USERNAME "$USER_HOME/.config/plasma-initialized"
+chown "$LIVE_USERNAME:$LIVE_USERNAME" "$USER_HOME/.config/plasma-initialized"
+
+echo "KDE config applied successfully"

@@ -5,7 +5,7 @@ ColorAmount=0
 ColorEffect=0
 ContrastAmount=0.65
 ContrastEffect=1
-Enable=false
+Enable=
 IntensityAmount=0.1
 IntensityEffect=2
 
@@ -132,15 +132,19 @@ ForegroundNormal=252,252,252
 ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
-
-[Icons]
-Theme=breeze-dark
+[DirSelect Dialog]
+DirSelectDialog Size=820,584
+History Items[$e]=file:$HOME/shadow-os-factory,file:$HOME/shadow-os-factory
+Splitter State=\x00\x00\x00\xff\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00\x8c\x00\x00\x02\xa8\x00\xff\xff\xff\xff\x01\x00\x00\x00\x01\x00
 
 [General]
-ColorScheme=BreezeDark
+ColorSchemeHash=7b61368c55eaab4075e7b1ae9501f3675b0f830f
+
+[Icons]
+Theme=Win11-black-dark
 
 [KDE]
-LookAndFeelPackage=com.shadow.desktop
+LookAndFeelPackage=org.kde.breezedark.desktop
 
 [KFileDialog Settings]
 Allow Expansion=false
