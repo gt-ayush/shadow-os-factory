@@ -1,0 +1,18 @@
+#!/bin/bash
+
+echo "Applying Shadow KDE layout..."
+
+USER_HOME="/home/$LIVE_USERNAME"
+
+# Make sure config dir exists
+mkdir -p "$USER_HOME/.config"
+
+# Copy layout
+cp -f /etc/skel/.config/plasma-org.kde.plasma.desktop-appletsrc \
+      "$USER_HOME/.config/"
+
+# Fix ownership
+chown -R $LIVE_USERNAME:$LIVE_USERNAME "$USER_HOME/.config"
+
+touch "$USER_HOME/.config/plasma-initialized"
+chown $LIVE_USERNAME:$LIVE_USERNAME "$USER_HOME/.config/plasma-initialized"

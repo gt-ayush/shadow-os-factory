@@ -5,8 +5,11 @@ RightButton;NoModifier=org.kde.contextmenu
 RightButton;NoModifier=org.kde.contextmenu
 
 [Containments][1]
+ItemGeometriesHorizontal=
+activityId=
 formfactor=0
 immutability=1
+lastScreen=0
 location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
@@ -15,16 +18,19 @@ wallpaperplugin=org.kde.image
 DialogHeight=540
 DialogWidth=720
 
+[Containments][1][General]
 
 
 [Containments][1][Wallpaper][org.kde.image][General]
 Image=/usr/share/wallpapers/shadow/Fire-Watch.jpg
 PreviewImage=/usr/share/wallpapers/shadow/Fire-Watch.jpg
-SlidePaths=/usr/share/wallpapers/
+SlidePaths=/usr/share/wallpapers/shadow/
 
 [Containments][2]
+activityId=
 formfactor=2
 immutability=1
+lastScreen=0
 location=3
 plugin=org.kde.panel
 wallpaperplugin=org.kde.image
@@ -34,9 +40,9 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][2][Applets][21][Configuration]
-PreloadWeight=55
+PreloadWeight=60
 popupHeight=450
-popupWidth=560
+popupWidth=810
 
 [Containments][2][Applets][21][Configuration][Appearance]
 dateFormat=longDate
@@ -64,6 +70,9 @@ plugin=org.kde.plasma.panelspacer
 immutability=1
 plugin=org.kde.plasma.trash
 
+[Containments][2][Applets][35][Configuration]
+PreloadWeight=55
+
 [Containments][2][Applets][6]
 immutability=1
 plugin=org.kde.plasma.marginsseparator
@@ -73,7 +82,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][2][Applets][7][Configuration]
-PreloadWeight=55
+PreloadWeight=100
 SystrayContainmentId=8
 
 [Containments][2][General]
@@ -95,20 +104,29 @@ plugin=org.kde.plasma.kicker
 [Containments][29][Applets][34][Configuration]
 PreloadWeight=100
 popupHeight=411
-popupWidth=831
+popupWidth=300
 
 [Containments][29][Applets][34][Configuration][General]
 favoritesPortedToKAstats=true
+
+[Containments][29][Applets][36]
+immutability=1
+plugin=org.kde.milou
+
+[Containments][29][Applets][36][Configuration]
+PreloadWeight=65
+popupHeight=34
+popupWidth=630
 
 [Containments][29][Applets][5]
 immutability=1
 plugin=org.kde.plasma.icontasks
 
 [Containments][29][Applets][5][Configuration][General]
-launchers=applications:systemsettings.desktop,preferred://filemanager,preferred://browser,applications:firefox-esr.desktop,applications:org.kde.konsole.desktop
+launchers=applications:systemsettings.desktop,applications:org.kde.discover.desktop,preferred://filemanager,applications:firefox-esr.desktop,applications:org.kde.konsole.desktop
 
 [Containments][29][General]
-AppletOrder=34;5
+AppletOrder=34;36;5
 
 [Containments][8]
 activityId=
@@ -130,7 +148,7 @@ immutability=1
 plugin=org.kde.plasma.clipboard
 
 [Containments][8][Applets][11][Configuration]
-PreloadWeight=60
+PreloadWeight=80
 
 [Containments][8][Applets][12]
 immutability=1
@@ -156,6 +174,9 @@ plugin=org.kde.plasma.cameraindicator
 immutability=1
 plugin=org.kde.plasma.notifications
 
+[Containments][8][Applets][17][Configuration]
+PreloadWeight=60
+
 [Containments][8][Applets][18]
 immutability=1
 plugin=org.kde.plasma.volume
@@ -172,28 +193,28 @@ immutability=1
 plugin=org.kde.plasma.devicenotifier
 
 [Containments][8][Applets][20][Configuration]
-PreloadWeight=55
+PreloadWeight=60
 
 [Containments][8][Applets][23]
 immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][8][Applets][23][Configuration]
-PreloadWeight=34
+PreloadWeight=0
 
 [Containments][8][Applets][24]
 immutability=1
 plugin=org.kde.plasma.brightness
 
 [Containments][8][Applets][24][Configuration]
-PreloadWeight=34
+PreloadWeight=0
 
 [Containments][8][Applets][25]
 immutability=1
 plugin=org.kde.plasma.networkmanagement
 
 [Containments][8][Applets][25][Configuration]
-PreloadWeight=55
+PreloadWeight=100
 
 [Containments][8][Applets][26]
 immutability=1
@@ -207,6 +228,9 @@ plugin=org.kde.plasma.keyboardlayout
 extraItems=org.kde.plasma.keyboardlayout,org.kde.kupapplet,org.kde.plasma.manage-inputmethod,org.kde.plasma.bluetooth,org.kde.plasma.clipboard,org.kde.kdeconnect,org.kde.plasma.battery,org.kde.plasma.keyboardindicator,org.kde.plasma.vault,org.kde.kscreen,org.kde.plasma.cameraindicator,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.mediacontroller,org.kde.plasma.brightness,org.kde.plasma.volume,org.kde.plasma.printmanager,org.kde.plasma.devicenotifier
 knownItems=org.kde.plasma.keyboardlayout,org.kde.kupapplet,org.kde.plasma.manage-inputmethod,org.kde.plasma.bluetooth,org.kde.plasma.clipboard,org.kde.kdeconnect,org.kde.plasma.battery,org.kde.plasma.keyboardindicator,org.kde.plasma.vault,org.kde.kscreen,org.kde.plasma.cameraindicator,org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.mediacontroller,org.kde.plasma.brightness,org.kde.plasma.volume,org.kde.plasma.printmanager,org.kde.plasma.devicenotifier
 
+[Containments29Appletsts][5][Configuration][General]
+launchers=applications:systemsettings.desktop,applications:org.kde.discover.desktop,preferred://filemanager,preferred://browser,applications:firefox-esr.desktop
 
 [ScreenMapping]
-
+itemsOnDisabledScreens=
+screenMapping=desktop:/kdeglobals,0,d194e66f-1bcb-4654-a1c5-e39dc2b0094a,desktop:/plasma-org.kde.plasma.desktop-appletsrc,0,d194e66f-1bcb-4654-a1c5-e39dc2b0094a
