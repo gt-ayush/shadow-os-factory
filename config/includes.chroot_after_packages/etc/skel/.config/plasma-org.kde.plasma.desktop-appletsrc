@@ -21,7 +21,7 @@ DialogWidth=720
 [Containments][1][General]
 
 
-[Containments][1][Wallpaper][org.kde.image][General]
+[Containments][37][Wallpaper][org.kde.image][General]
 Image=/usr/share/wallpapers/shadow/Fire-Watch.jpg
 PreviewImage=/usr/share/wallpapers/shadow/Fire-Watch.jpg
 SlidePaths=/usr/share/wallpapers/shadow/

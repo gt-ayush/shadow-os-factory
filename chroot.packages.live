@@ -2133,7 +2133,7 @@ systemsettings	4:6.3.4-2
 sysvinit-utils	3.14-4
 tar	1.35+dfsg-3.1
 tdb-tools	2:1.4.13+samba4.22.8+dfsg-0+deb13u1
-thunderbird	1:140.9.1esr-1~deb13u1
+thunderbird	1:140.10.0esr-1~deb13u1
 timgm6mb-soundfont	1.3-5
 tpm-udev	0.6+nmu1
 tzdata	2026a-0+deb13u1
