@@ -1,204 +1,337 @@
-# Shadow OS — Professional Project Write-Up
+# Shadow OS
+
+> **A Modern, Performance-Focused, Security-Conscious Debian-Based Linux Distribution**
+
+![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/Platform-Debian-red)
+![Desktop](https://img.shields.io/badge/Desktop-KDE%20Plasma-blue)
+![Status](https://img.shields.io/badge/Status-Active%20Development-success)
+
+---
 
 ## Overview
 
-**Shadow OS** is a custom Debian-based Linux distribution engineered as a modern, performance-focused, security-conscious desktop operating system. Built using **Debian Live Build** infrastructure, the project focuses on creating a polished, reproducible, and production-grade Linux experience with deep system-level customization rather than surface-level theming.
+**Shadow OS** is a custom Debian-based Linux distribution built from the ground up using **Debian Live Build**. The project focuses on creating a polished, reproducible, and production-ready operating system with deep system-level customization rather than simple package or theme modifications.
+
+Shadow OS aims to provide a modern desktop experience while demonstrating advanced Linux distribution engineering concepts, including build automation, desktop integration, system branding, security hardening, and reproducible operating system deployment.
 
 ---
 
-# Project Objective
+## Features
 
-The goal of **Shadow OS** is to design and build a fully customized operating system that demonstrates practical expertise in:
+### 🎨 Desktop Experience
 
-- Linux system architecture
-- Distribution engineering
-- Desktop environment customization
-- Boot process customization
-- System branding and identity design
-- Security hardening
-- Build automation
-- Reproducible operating system deployment
+- KDE Plasma Desktop
+- Custom Shadow OS branding
+- Custom wallpapers
+- Customized panel layout
+- Plasma Look-and-Feel integration
+- System-wide KDE configuration
+- Custom Fastfetch branding
 
-This project moves beyond package customization and into **distribution creation**, where the operating system itself is treated as a product.
-
----
-
-# Technical Foundation
-
-Shadow OS is built on:
-
-- **Base Distribution:** Debian (Bookworm / Trixie build targets)
-- **Build Framework:** Debian Live Build (`live-build`)
-- **Desktop Stack:** KDE Plasma
-- **Boot Splash System:** Plymouth
-- **Bootloader Branding:** GNU GRUB customization
-- **Security Stack:** Firewall policy + AppArmor enablement
-- **System Initialization:** systemd + live-config integration
-- **Packaging Model:** Modular filesystem overlays and hook-based architecture
-
----
-
-# Core Engineering Work Completed
-
-## 1. Custom Distribution Build System
-
-Designed a structured distribution factory using modular Debian Live Build configuration, including:
-
-- Custom build hooks
-- Filesystem overlays
-- Modular package manifests
-- Post-install automation
-- Deterministic build scripting
-- Automated ISO generation pipeline
-
-This establishes a reproducible operating system build environment similar in concept to how specialized Linux distributions are assembled.
-
----
-
-## 2. Deep Branding Integration
-
-Implemented branding across multiple layers of the operating system:
+### 🚀 Boot Experience
 
 - Custom Plymouth boot animation
-- Distribution logo assets
-- Terminal ASCII branding
-- Wallpaper pack integration
-- Custom release metadata
-- Machine identity configuration
-- Login and boot visual customization
+- Custom GRUB theme
+- Boot splash branding
+- Customized boot sequence
 
-Branding assets are deployed using the standard Linux filesystem hierarchy (`/usr/share`) together with system-wide configuration and initramfs integration.
+### 🔒 Security
+
+- AppArmor enabled by default
+- Firewall configured out of the box
+- Secure sudo configuration
+- Security-focused system defaults
+
+### ⚙️ System Engineering
+
+- Debian Live Build architecture
+- Modular package lists
+- Hook-based automation
+- Filesystem overlays
+- Reproducible ISO builds
+- Automated build pipeline
 
 ---
 
-## 3. KDE Plasma Customization
+# Project Goals
 
-Developed desktop customization at the configuration level, including:
+The primary objective of Shadow OS is to explore and implement professional Linux distribution engineering practices by building a complete operating system that demonstrates:
 
-- Panel layout engineering
-- Widget placement logic
-- Default theme enforcement
-- System-wide configuration propagation
-- Skeleton user defaults
-- Deterministic first-boot desktop initialization
+- Distribution Engineering
+- Linux System Architecture
+- Desktop Environment Customization
+- Boot Process Engineering
+- Security Hardening
+- Build Automation
+- System Branding
+- Reproducible Builds
 
-This required an understanding of:
+---
 
-- `/etc/xdg`
-- `/etc/skel`
-- Plasma Look-and-Feel packages
+# Technical Stack
+
+| Component | Technology |
+|------------|------------|
+| Base Distribution | Debian 13 (Trixie) / Debian 12 (Bookworm) |
+| Build System | Debian Live Build (`live-build`) |
+| Desktop Environment | KDE Plasma |
+| Display Manager | SDDM |
+| Init System | systemd |
+| Boot Splash | Plymouth |
+| Bootloader | GNU GRUB |
+| Security | AppArmor + UFW |
+| Shell | Bash |
+
+---
+
+# Project Structure
+
+```text
+shadow-os-factory/
+│
+├── auto/
+│   ├── build
+│   ├── clean
+│   └── config
+│
+├── config/
+│   ├── archives/
+│   ├── bootloaders/
+│   ├── hooks/
+│   ├── includes.chroot/
+│   ├── includes.chroot_after_packages/
+│   ├── package-lists/
+│   └── preseed/
+│
+├── images/
+│
+├── scripts/
+│
+├── build.sh
+│
+└── README.md
+```
+
+---
+
+# Core Features
+
+## Custom Distribution Build System
+
+- Automated ISO generation
+- Modular architecture
+- Package management
+- Build automation
+- Hook execution
+- Overlay filesystem support
+
+---
+
+## KDE Plasma Customization
+
+- System-wide Plasma configuration
+- Custom panel layouts
+- Theme customization
+- Wallpaper integration
+- Default desktop configuration
 - Plasma layout scripting
-- Live user provisioning workflow
 
 ---
 
-## 4. Security Hardening
+## Branding
 
-Integrated secure system defaults including:
+Shadow OS includes custom branding across multiple components:
 
-- AppArmor enabled at boot
-- Default firewall deny policy for inbound traffic
-- Controlled outbound firewall policy
-- Custom sudo policy configuration
-- Secure system default posture
+- Distribution identity
+- Fastfetch logo
+- Boot splash
+- Login screen
+- Wallpapers
+- Machine information
+- Release information
+- Terminal branding
 
 ---
 
-## 5. Boot Pipeline Engineering
+## Boot Customization
 
-Customized the early boot process through:
-
-- Plymouth theme registration
-- Initramfs regeneration
-- GRUB theme integration
+- Plymouth theme
+- GRUB theme
+- Initramfs integration
 - Boot asset deployment
-- Early userspace branding
 
 ---
 
-## 6. Build Automation
+## Security
 
-Developed automated build workflows featuring:
+- AppArmor enabled
+- Firewall configuration
+- Secure defaults
+- Hardened desktop environment
 
-- Automated cleanup pipeline
-- Resource management
-- Build logging
-- Automatic shutdown after successful builds
-- System state restoration
-- Reliability and safety safeguards
+---
+
+# Build Requirements
+
+- Debian 12 (Bookworm) or Debian 13 (Trixie)
+- live-build
+- Git
+- Bash
+- Root privileges (for build operations)
+- 16 GB RAM recommended
+- 30+ GB free disk space
+
+---
+
+# Building Shadow OS
+
+Clone the repository:
+
+```bash
+git clone https://github.com/<your-username>/shadow-os.git
+cd shadow-os
+```
+
+Install dependencies:
+
+```bash
+sudo apt install live-build git
+```
+
+Build the ISO:
+
+```bash
+./build.sh
+```
+
+The generated ISO will be available after a successful build.
 
 ---
 
 # Skills Demonstrated
 
-## Operating Systems
+This project showcases practical experience in:
 
-- Linux internals
-- Initramfs lifecycle
-- Boot pipeline architecture
-- Linux filesystem hierarchy standards
+### Linux
 
-## DevOps / Infrastructure
+- Linux Internals
+- Filesystem Hierarchy
+- Initramfs
+- Boot Process
+- System Services
 
-- Automation scripting
-- Reproducible builds
-- CI-inspired build workflows
-- Package management automation
+### Distribution Engineering
 
-## Desktop Engineering
+- Debian Live Build
+- Package Management
+- Hook Systems
+- Filesystem Overlays
+- Release Engineering
 
-- KDE Plasma internals
-- XDG configuration hierarchy
-- Live-user provisioning
-- Desktop deployment automation
+### Desktop Engineering
 
-## Security
+- KDE Plasma
+- XDG Configuration
+- Plasma Layout Scripts
+- System Defaults
 
-- Mandatory Access Control (AppArmor)
-- Firewall configuration
-- Linux system hardening principles
+### DevOps
 
-## Product Engineering
+- Bash Automation
+- Build Pipelines
+- Logging
+- Reproducible Builds
 
+### Security
+
+- AppArmor
+- Firewall Configuration
+- Linux Hardening
+
+---
+
+# Roadmap
+
+## Completed
+
+- Debian Live Build integration
+- KDE Plasma customization
+- Plymouth branding
+- Fastfetch branding
+- Security hardening
+- Wallpaper integration
+- Build automation
 - System branding
-- User experience customization
-- Release engineering
-- Distribution packaging
+
+## In Progress
+
+- Custom GRUB theme
+- Installer customization
+- Branding improvements
+- Performance optimization
+
+## Planned
+
+- Calamares installer integration
+- Package repository
+- Automatic updates
+- Release management
+- CI/CD build pipeline
+- Multi-desktop variants
+- ARM64 support
 
 ---
 
-# Project Value
+# Contributing
 
-Shadow OS is not simply a Linux customization project. It demonstrates **distribution engineering**, involving the design, construction, branding, automation, and hardening of an operating system built from a Debian base.
+Contributions, bug reports, feature requests, and suggestions are welcome.
 
-The project showcases practical knowledge of Linux system engineering, reproducible build systems, desktop integration, and operating system deployment.
+If you would like to contribute:
 
----
-
-# Relevant Career Domains
-
-The skills demonstrated through Shadow OS are applicable to roles in:
-
-- Linux Engineering
-- Platform Engineering
-- DevOps Engineering
-- Systems Administration
-- Embedded Linux Development
-- Infrastructure Automation
-- Desktop Linux Product Development
-- Open Source Platform Engineering
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Submit a Pull Request
 
 ---
 
-# Current Status
+# Disclaimer
 
-Shadow OS is an actively developed operating system engineering project featuring:
+Shadow OS is currently an educational and research project intended to explore Linux distribution engineering, operating system customization, and automation techniques.
 
-- Functional Debian Live ISO generation
-- Custom KDE Plasma desktop experience
-- Integrated branding across boot and desktop environments
-- Security baseline implementation
-- Automated build pipeline
-- Modular and reproducible project architecture
+It is under active development and should not yet be considered production-ready.
 
-Future development will focus on installer integration, package repository management, release engineering, performance optimization, and long-term maintenance workflows.
+---
+
+# Author
+
+**Ayush**
+
+Student • Linux Enthusiast • Open Source Developer
+
+---
+
+# Acknowledgements
+
+This project builds upon the incredible work of:
+
+- Debian Project
+- Debian Live Build Team
+- KDE Community
+- Plymouth Developers
+- GNU Project
+- Linux Kernel Community
+- Open Source Contributors worldwide
+
+---
+
+## License
+
+This project is released under the **MIT License**.
+
+See the `LICENSE` file for more information.
+
+---
+
+> **Shadow OS** — *Engineering a Linux distribution from the ground up.*
