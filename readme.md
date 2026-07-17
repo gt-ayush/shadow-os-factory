@@ -1,71 +1,65 @@
-# Shadow OS
+# Shadow OS Factory
 
-> **A Modern, Performance-Focused, Security-Conscious Debian-Based Linux Distribution**
+> **Building a modern Debian-based Linux distribution from source using Debian Live Build.**
 
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
-![Platform](https://img.shields.io/badge/Platform-Debian-red)
-![Desktop](https://img.shields.io/badge/Desktop-KDE%20Plasma-blue)
-![Status](https://img.shields.io/badge/Status-Active%20Development-success)
+![Platform](https://img.shields.io/badge/Base-Debian%2013%20(Trixie)-A81D33?logo=debian)
+![Desktop](https://img.shields.io/badge/Desktop-KDE%20Plasma-1D99F3?logo=kde)
+![Build](https://img.shields.io/badge/Build-live--build-success)
+![Status](https://img.shields.io/badge/Status-Active%20Development-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-blue)
 
 ---
 
 ## Overview
 
-**Shadow OS** is a custom Debian-based Linux distribution built from the ground up using **Debian Live Build**. The project focuses on creating a polished, reproducible, and production-ready operating system with deep system-level customization rather than simple package or theme modifications.
+**Shadow OS** is a custom Debian-based Linux distribution built using the **Debian Live Build** framework. The project explores professional Linux distribution engineering by developing a fully customized operating system rather than simply modifying an existing desktop.
 
-Shadow OS aims to provide a modern desktop experience while demonstrating advanced Linux distribution engineering concepts, including build automation, desktop integration, system branding, security hardening, and reproducible operating system deployment.
+The objective is to build a reproducible, secure, and modern desktop operating system with custom branding, automated builds, deep KDE Plasma customization, boot branding, and security hardening.
 
 ---
 
 ## Features
 
-### 🎨 Desktop Experience
+### Desktop
 
-- KDE Plasma Desktop
-- Custom Shadow OS branding
-- Custom wallpapers
-- Customized panel layout
-- Plasma Look-and-Feel integration
-- System-wide KDE configuration
-- Custom Fastfetch branding
+- KDE Plasma desktop
+- Custom Plasma layout
+- Shadow OS wallpapers
+- System-wide KDE defaults
+- Custom Look-and-Feel package
+- Custom desktop branding
 
-### 🚀 Boot Experience
+### Boot Experience
 
-- Custom Plymouth boot animation
+- Custom Plymouth theme
 - Custom GRUB theme
-- Boot splash branding
-- Customized boot sequence
+- Branded boot sequence
+- Initramfs integration
 
-### 🔒 Security
+### Branding
 
-- AppArmor enabled by default
-- Firewall configured out of the box
-- Secure sudo configuration
-- Security-focused system defaults
+- Custom distribution identity
+- Shadow OS logos
+- Fastfetch ASCII logo
+- Custom machine information
+- Release metadata
+- Terminal branding
 
-### ⚙️ System Engineering
+### Security
 
-- Debian Live Build architecture
+- AppArmor enabled
+- Firewall configured by default
+- Hardened system defaults
+- Custom sudo policy
+
+### Build System
+
+- Debian Live Build
 - Modular package lists
-- Hook-based automation
+- Automated build scripts
+- Build hooks
 - Filesystem overlays
-- Reproducible ISO builds
-- Automated build pipeline
-
----
-
-# Project Goals
-
-The primary objective of Shadow OS is to explore and implement professional Linux distribution engineering practices by building a complete operating system that demonstrates:
-
-- Distribution Engineering
-- Linux System Architecture
-- Desktop Environment Customization
-- Boot Process Engineering
-- Security Hardening
-- Build Automation
-- System Branding
-- Reproducible Builds
+- Reproducible ISO generation
 
 ---
 
@@ -73,13 +67,13 @@ The primary objective of Shadow OS is to explore and implement professional Linu
 
 | Component | Technology |
 |------------|------------|
-| Base Distribution | Debian 13 (Trixie) / Debian 12 (Bookworm) |
-| Build System | Debian Live Build (`live-build`) |
-| Desktop Environment | KDE Plasma |
+| Base Distribution | Debian 13 (Trixie) |
+| Build Framework | Debian Live Build |
+| Desktop | KDE Plasma |
 | Display Manager | SDDM |
-| Init System | systemd |
-| Boot Splash | Plymouth |
 | Bootloader | GNU GRUB |
+| Boot Splash | Plymouth |
+| Init System | systemd |
 | Security | AppArmor + UFW |
 | Shell | Bash |
 
@@ -87,100 +81,192 @@ The primary objective of Shadow OS is to explore and implement professional Linu
 
 # Project Structure
 
-```text
+```
 shadow-os-factory/
 │
-├── auto/
+├── auto/                              # live-build wrapper scripts
 │   ├── build
 │   ├── clean
 │   └── config
 │
 ├── config/
-│   ├── archives/
-│   ├── bootloaders/
-│   ├── hooks/
-│   ├── includes.chroot/
+│   ├── archives/                      # Additional repositories
+│   ├── bootloaders/                   # GRUB configuration
+│   ├── hooks/                         # Build hooks
+│   │   └── live/
+│   ├── includes.chroot/               # Files copied before packages
 │   ├── includes.chroot_after_packages/
-│   ├── package-lists/
-│   └── preseed/
+│   │   ├── etc/
+│   │   ├── lib/
+│   │   └── usr/
+│   ├── package-lists/                 # Modular package lists
+│   └── preseed/                       # Automated installer configs
 │
-├── images/
-│
-├── scripts/
-│
-├── build.sh
-│
-└── README.md
+├── build.sh                           # ISO build script
+├── README.md
+└── LICENSE
 ```
 
 ---
 
-# Core Features
+# Repository Layout
 
-## Custom Distribution Build System
+## `auto/`
 
-- Automated ISO generation
-- Modular architecture
-- Package management
-- Build automation
-- Hook execution
-- Overlay filesystem support
+Wrapper scripts used by Debian Live Build for configuring, cleaning, and building the distribution.
 
 ---
 
-## KDE Plasma Customization
+## `config/hooks/`
 
-- System-wide Plasma configuration
-- Custom panel layouts
-- Theme customization
-- Wallpaper integration
-- Default desktop configuration
-- Plasma layout scripting
+Contains automated build-time scripts responsible for:
+
+- Security configuration
+- AppArmor setup
+- Firewall initialization
+- Plymouth registration
+- KDE configuration
+- GRUB branding
+- Initramfs updates
 
 ---
 
-## Branding
+## `config/package-lists/`
 
-Shadow OS includes custom branding across multiple components:
+Modular package definitions grouped by functionality.
 
-- Distribution identity
-- Fastfetch logo
-- Boot splash
-- Login screen
+Examples include:
+
+- Base system
+- Desktop environment
+- Utilities
+- Development tools
+- Drivers
+- Networking
+
+---
+
+## `config/includes.chroot/`
+
+Contains files copied directly into the root filesystem during image creation.
+
+---
+
+## `config/includes.chroot_after_packages/`
+
+Contains files installed after package installation to override package defaults.
+
+This includes:
+
+- KDE Plasma configuration
+- Plymouth themes
 - Wallpapers
-- Machine information
-- Release information
-- Terminal branding
+- Distribution branding
+- Machine metadata
+- Live-config components
+- System utilities
 
 ---
 
-## Boot Customization
+# Branding Assets
 
-- Plymouth theme
-- GRUB theme
-- Initramfs integration
-- Boot asset deployment
+Shadow OS stores branding resources following the Linux Filesystem Hierarchy Standard.
+
+```
+usr/share/
+├── plasma/
+│   └── look-and-feel/
+├── plymouth/
+│   └── themes/
+├── shadow/
+│   ├── logo.txt
+│   ├── shadow.png
+│   └── shadow-logo.png
+└── wallpapers/
+    └── shadow/
+```
+
+These assets are shared across multiple components including:
+
+- KDE Plasma
+- Plymouth
+- Fastfetch
+- GRUB
+- Login Manager
+- Desktop wallpaper
 
 ---
+
+# Build Pipeline
+
+```
+Source Files
+      │
+      ▼
+Debian Live Build Configuration
+      │
+      ▼
+Package Installation
+      │
+      ▼
+Filesystem Overlays
+      │
+      ▼
+Build Hooks
+      │
+      ▼
+Initramfs Generation
+      │
+      ▼
+GRUB Configuration
+      │
+      ▼
+ISO Packaging
+      │
+      ▼
+Shadow OS ISO
+```
+
+---
+
+# Skills Demonstrated
+
+## Linux Engineering
+
+- Linux filesystem hierarchy
+- Boot process
+- Initramfs
+- System services
+- Distribution architecture
+
+## Distribution Engineering
+
+- Debian Live Build
+- Package management
+- Hook systems
+- Overlay filesystems
+- Release engineering
+
+## Desktop Engineering
+
+- KDE Plasma customization
+- Plasma layout scripting
+- XDG configuration
+- System defaults
 
 ## Security
 
-- AppArmor enabled
+- AppArmor
 - Firewall configuration
-- Secure defaults
-- Hardened desktop environment
+- Secure system defaults
 
----
+## Automation
 
-# Build Requirements
-
-- Debian 12 (Bookworm) or Debian 13 (Trixie)
-- live-build
-- Git
-- Bash
-- Root privileges (for build operations)
-- 16 GB RAM recommended
-- 30+ GB free disk space
+- Bash scripting
+- Build automation
+- Logging
+- Resource management
+- Reproducible builds
 
 ---
 
@@ -189,8 +275,8 @@ Shadow OS includes custom branding across multiple components:
 Clone the repository:
 
 ```bash
-git clone https://github.com/<your-username>/shadow-os.git
-cd shadow-os
+git clone https://github.com/gt-ayush/shadow-os-factory.git
+cd shadow-os-factory
 ```
 
 Install dependencies:
@@ -202,135 +288,92 @@ sudo apt install live-build git
 Build the ISO:
 
 ```bash
+chmod +x build.sh
 ./build.sh
 ```
 
-The generated ISO will be available after a successful build.
-
----
-
-# Skills Demonstrated
-
-This project showcases practical experience in:
-
-### Linux
-
-- Linux Internals
-- Filesystem Hierarchy
-- Initramfs
-- Boot Process
-- System Services
-
-### Distribution Engineering
-
-- Debian Live Build
-- Package Management
-- Hook Systems
-- Filesystem Overlays
-- Release Engineering
-
-### Desktop Engineering
-
-- KDE Plasma
-- XDG Configuration
-- Plasma Layout Scripts
-- System Defaults
-
-### DevOps
-
-- Bash Automation
-- Build Pipelines
-- Logging
-- Reproducible Builds
-
-### Security
-
-- AppArmor
-- Firewall Configuration
-- Linux Hardening
+After a successful build, the generated ISO will be available in the project directory.
 
 ---
 
 # Roadmap
 
-## Completed
+### Completed
 
 - Debian Live Build integration
 - KDE Plasma customization
+- Custom desktop layout
 - Plymouth branding
 - Fastfetch branding
 - Security hardening
-- Wallpaper integration
-- Build automation
-- System branding
+- Automated build pipeline
+- Custom wallpapers
+- Distribution branding
 
-## In Progress
+### In Progress
 
-- Custom GRUB theme
-- Installer customization
-- Branding improvements
+- Advanced GRUB customization
+- Installer integration
 - Performance optimization
+- Additional branding improvements
 
-## Planned
+### Planned
 
-- Calamares installer integration
+- Calamares installer
 - Package repository
-- Automatic updates
-- Release management
-- CI/CD build pipeline
-- Multi-desktop variants
+- OTA update infrastructure
+- CI/CD build automation
 - ARM64 support
+- Multiple desktop variants
 
 ---
 
 # Contributing
 
-Contributions, bug reports, feature requests, and suggestions are welcome.
+Contributions are welcome.
 
-If you would like to contribute:
+If you would like to improve Shadow OS:
 
 1. Fork the repository
 2. Create a feature branch
 3. Commit your changes
-4. Submit a Pull Request
+4. Open a Pull Request
 
 ---
 
 # Disclaimer
 
-Shadow OS is currently an educational and research project intended to explore Linux distribution engineering, operating system customization, and automation techniques.
-
-It is under active development and should not yet be considered production-ready.
-
----
-
-# Author
-
-**Ayush**
-
-Student • Linux Enthusiast • Open Source Developer
+Shadow OS is an educational and engineering project focused on Linux distribution development. It is under active development and is not yet intended for production use.
 
 ---
 
 # Acknowledgements
 
-This project builds upon the incredible work of:
+This project builds upon the work of:
 
 - Debian Project
 - Debian Live Build Team
 - KDE Community
-- Plymouth Developers
 - GNU Project
+- Plymouth Developers
 - Linux Kernel Community
 - Open Source Contributors worldwide
 
 ---
 
-## License
+# License
 
-This project is released under the **MIT License**.
+This project is licensed under the **MIT License**.
 
-See the `LICENSE` file for more information.
+See the `LICENSE` file for details.
+
+---
+
+## Author
+
+**Ayush**
+
+Student • Linux Enthusiast • Open Source Developer
 
 ---
 
