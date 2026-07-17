@@ -1,12 +1,14 @@
-Shadow OS 
+# Shadow OS — Professional Project Write-Up
 
-Overview
+## Overview
 
-Shadow OS is a custom Debian-based Linux distribution engineered as a modern, performance-focused, security-conscious desktop operating system. Built using Debian Live Build infrastructure, the project focuses on creating a polished, reproducible, and production-grade Linux experience with deep system-level customization rather than surface-level theming.
+**Shadow OS** is a custom Debian-based Linux distribution engineered as a modern, performance-focused, security-conscious desktop operating system. Built using **Debian Live Build** infrastructure, the project focuses on creating a polished, reproducible, and production-grade Linux experience with deep system-level customization rather than surface-level theming.
 
-Project Objective
+---
 
-The goal of Shadow OS is to design and build a fully customized operating system that demonstrates practical expertise in:
+# Project Objective
+
+The goal of **Shadow OS** is to design and build a fully customized operating system that demonstrates practical expertise in:
 
 - Linux system architecture
 - Distribution engineering
@@ -17,153 +19,186 @@ The goal of Shadow OS is to design and build a fully customized operating system
 - Build automation
 - Reproducible operating system deployment
 
-This project moves beyond package customization and into distribution creation, where the operating system itself is treated as a product.
+This project moves beyond package customization and into **distribution creation**, where the operating system itself is treated as a product.
 
-Technical Foundation
+---
+
+# Technical Foundation
 
 Shadow OS is built on:
 
-- Base Distribution: Debian (Bookworm / Trixie build targets)
-- Build Framework: Debian Live Build ("live-build")
-- Desktop Stack: KDE Plasma
-- Boot Splash System: Plymouth
-- Bootloader Branding: GNU GRUB customization
-- Security Stack: Firewall policy + AppArmor enablement
-- System Initialization: systemd + live-config integration
-- Packaging Model: modular filesystem overlays + hooks architecture
+- **Base Distribution:** Debian (Bookworm / Trixie build targets)
+- **Build Framework:** Debian Live Build (`live-build`)
+- **Desktop Stack:** KDE Plasma
+- **Boot Splash System:** Plymouth
+- **Bootloader Branding:** GNU GRUB customization
+- **Security Stack:** Firewall policy + AppArmor enablement
+- **System Initialization:** systemd + live-config integration
+- **Packaging Model:** Modular filesystem overlays and hook-based architecture
 
-Core Engineering Work Completed
+---
 
-1) Custom Distribution Build System
+# Core Engineering Work Completed
 
-Designed a structured distribution factory using modular Debian Live Build configuration:
+## 1. Custom Distribution Build System
 
-- custom hooks
-- filesystem overlays
-- package manifests
-- post-install automation
-- deterministic build scripting
-- automated ISO generation pipeline
+Designed a structured distribution factory using modular Debian Live Build configuration, including:
+
+- Custom build hooks
+- Filesystem overlays
+- Modular package manifests
+- Post-install automation
+- Deterministic build scripting
+- Automated ISO generation pipeline
 
 This establishes a reproducible operating system build environment similar in concept to how specialized Linux distributions are assembled.
 
-2) Deep Branding Integration
+---
 
-Implemented branding at multiple system layers:
+## 2. Deep Branding Integration
 
-- custom Plymouth boot animation
-- distribution logo assets
-- terminal ASCII branding
-- wallpaper pack integration
-- custom release metadata
-- machine identity configuration
-- login / boot visual customization
+Implemented branding across multiple layers of the operating system:
 
-Branding assets were placed using correct Linux filesystem hierarchy practices ("/usr/share", system-wide defaults, initramfs integration).
+- Custom Plymouth boot animation
+- Distribution logo assets
+- Terminal ASCII branding
+- Wallpaper pack integration
+- Custom release metadata
+- Machine identity configuration
+- Login and boot visual customization
 
-3) KDE Plasma Customization
+Branding assets are deployed using the standard Linux filesystem hierarchy (`/usr/share`) together with system-wide configuration and initramfs integration.
 
-Developed desktop customization at the configuration level:
+---
 
-- panel layout engineering
-- widget placement logic
-- default theme enforcement
-- system-wide configuration propagation
-- skeleton user defaults
-- deterministic first-boot desktop initialization
+## 3. KDE Plasma Customization
 
-This required understanding of:
+Developed desktop customization at the configuration level, including:
 
-- "/etc/xdg"
-- "/etc/skel"
-- Plasma Look-and-Feel packaging
-- desktop layout scripting
-- live user provisioning flow
+- Panel layout engineering
+- Widget placement logic
+- Default theme enforcement
+- System-wide configuration propagation
+- Skeleton user defaults
+- Deterministic first-boot desktop initialization
 
-4) Security Hardening
+This required an understanding of:
 
-Integrated security defaults:
+- `/etc/xdg`
+- `/etc/skel`
+- Plasma Look-and-Feel packages
+- Plasma layout scripting
+- Live user provisioning workflow
+
+---
+
+## 4. Security Hardening
+
+Integrated secure system defaults including:
 
 - AppArmor enabled at boot
-- firewall default deny inbound policy
-- controlled outbound policy
-- sudo policy customization
-- system default protection posture
+- Default firewall deny policy for inbound traffic
+- Controlled outbound firewall policy
+- Custom sudo policy configuration
+- Secure system default posture
 
-5) Boot Pipeline Engineering
+---
 
-Customized early boot stages:
+## 5. Boot Pipeline Engineering
+
+Customized the early boot process through:
 
 - Plymouth theme registration
-- initramfs regeneration
+- Initramfs regeneration
 - GRUB theme integration
-- boot asset placement
-- early userspace branding
+- Boot asset deployment
+- Early userspace branding
 
-6) Build Automation
+---
 
-Created automated build workflows including:
+## 6. Build Automation
 
-- cleanup pipeline
-- resource controls
-- logging
-- shutdown automation
-- system state restoration
-- reliability safeguards
+Developed automated build workflows featuring:
 
-Skills Demonstrated
+- Automated cleanup pipeline
+- Resource management
+- Build logging
+- Automatic shutdown after successful builds
+- System state restoration
+- Reliability and safety safeguards
 
-This project demonstrates applied capability in:
+---
 
-Operating Systems
+# Skills Demonstrated
+
+## Operating Systems
 
 - Linux internals
-- initramfs lifecycle
-- boot pipeline architecture
-- filesystem hierarchy standards
+- Initramfs lifecycle
+- Boot pipeline architecture
+- Linux filesystem hierarchy standards
 
-DevOps / Infrastructure
+## DevOps / Infrastructure
 
-- automation scripting
-- reproducible builds
-- CI-style build thinking
-- package management workflows
+- Automation scripting
+- Reproducible builds
+- CI-inspired build workflows
+- Package management automation
 
-Desktop Engineering
+## Desktop Engineering
 
 - KDE Plasma internals
-- XDG config hierarchy
-- live-user provisioning
-- desktop deployment automation
+- XDG configuration hierarchy
+- Live-user provisioning
+- Desktop deployment automation
 
-Security
+## Security
 
-- MAC policy enablement
-- firewall defaults
-- system hardening principles
+- Mandatory Access Control (AppArmor)
+- Firewall configuration
+- Linux system hardening principles
 
-Product Engineering
+## Product Engineering
 
-- branding consistency
-- user experience design
-- release engineering
-- deployment packaging
+- System branding
+- User experience customization
+- Release engineering
+- Distribution packaging
 
-Project Value
+---
 
-Shadow OS is not simply a Linux customization exercise—it is evidence of distribution engineering capability: designing, building, branding, automating, and hardening an operating system from the base distribution upward.
+# Project Value
 
-This project is directly relevant to opportunities in:
+Shadow OS is not simply a Linux customization project. It demonstrates **distribution engineering**, involving the design, construction, branding, automation, and hardening of an operating system built from a Debian base.
+
+The project showcases practical knowledge of Linux system engineering, reproducible build systems, desktop integration, and operating system deployment.
+
+---
+
+# Relevant Career Domains
+
+The skills demonstrated through Shadow OS are applicable to roles in:
 
 - Linux Engineering
 - Platform Engineering
-- DevOps
+- DevOps Engineering
 - Systems Administration
-- Embedded Linux
+- Embedded Linux Development
 - Infrastructure Automation
 - Desktop Linux Product Development
 - Open Source Platform Engineering
 
-Current Status
+---
 
-Shadow OS is an active operating system engineering project with functional ISO build capability, desktop customization, branding integration, and security baseline implementation.
+# Current Status
+
+Shadow OS is an actively developed operating system engineering project featuring:
+
+- Functional Debian Live ISO generation
+- Custom KDE Plasma desktop experience
+- Integrated branding across boot and desktop environments
+- Security baseline implementation
+- Automated build pipeline
+- Modular and reproducible project architecture
+
+Future development will focus on installer integration, package repository management, release engineering, performance optimization, and long-term maintenance workflows.
