@@ -359,16 +359,6 @@ This project builds upon the work of:
 - Linux Kernel Community
 - Open Source Contributors worldwide
 
----
-
-# License
-
-This project is licensed under the **MIT License**.
-
-See the `LICENSE` file for details.
-
----
-
 ## Author
 
 **Ayush**
