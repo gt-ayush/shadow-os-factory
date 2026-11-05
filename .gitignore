@@ -44,6 +44,7 @@ config/bootstrap
 config/common
 config/binary
 config/chroot
+config/source
 
 # =========================
 

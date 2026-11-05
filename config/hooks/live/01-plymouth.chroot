@@ -1,10 +1,15 @@
 #!/bin/bash
+#
+# Registers the Shadow OS Plymouth boot splash theme.
+#
+# plymouth and plymouth-themes are already pulled in by
+# config/package-lists/desktop.list.chroot, so no package installation is done
+# here - running apt inside a chroot hook is slow and memory-heavy.
 
-echo "Setting Plymouth theme..."
+echo "Setting Plymouth theme to 'shadow'..."
 
-# Ensure plymouth is installed (safe)
-apt-get update
-apt-get install -y plymouth plymouth-themes
-
-# Set your theme
-plymouth-set-default-theme shadow -R || true
+if [ -d /usr/share/plymouth/themes/shadow ]; then
+    plymouth-set-default-theme shadow -R || echo "WARNING: could not register plymouth theme" >&2
+else
+    echo "WARNING: /usr/share/plymouth/themes/shadow not found, skipping" >&2
+fi

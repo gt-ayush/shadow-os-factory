@@ -1,15 +1,25 @@
-live-boot
-live-config
-systemd-sysv
+# Core system essentials.
+# NOTE: the live-boot stack (live-boot, live-config, live-config-systemd,
+# systemd-sysv) is declared in live.list.chroot - do not duplicate it here.
+
+# Administration
 sudo
+
+# Networking
 network-manager
 wpasupplicant
 curl
 wget
+
+# Security
 fail2ban
 apparmor
 apparmor-utils
+
+# Audio
 pipewire
 wireplumber
+
+# Tools
 fastfetch
 libxcb-cursor0

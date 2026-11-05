@@ -26,6 +26,10 @@ mkdir -p "$TMPDIR"
 # Reduce CPU → less RAM pressure
 export MAKEFLAGS="-j1"
 
+# Non-interactive debconf so apt/dpkg never block on a prompt.
+# (apt auto-confirm is already handled by live-build's APT_OPTIONS="--yes ...")
+export DEBIAN_FRONTEND=noninteractive
+
 # Reduce I/O priority (keeps system responsive)
 ionice -c2 -n7 -p $$ >/dev/null 2>&1 || true
 
@@ -55,7 +59,7 @@ lb config \
     --debian-installer live \
     --binary-images iso-hybrid \
     --memtest memtest86+ \
-    --apt-recommends true \
+    --apt-recommends false \
     --backports true
 
 # ==============================
