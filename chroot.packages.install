@@ -696,7 +696,7 @@ libmbedcrypto16:amd64	3.6.6-0.1~deb13u1
 libmd0:amd64	1.1.0-2+b1
 libmd4c0:amd64	0.5.2-2+b1
 libmhash2:amd64	0.9.9.9-10
-libminizip1t64:amd64	1:1.3.dfsg+really1.3.1-1+b1
+libminizip1t64:amd64	1:1.3.dfsg+really1.3.1-1+deb13u1
 libmm-glib0:amd64	1.24.0-1+deb13u1
 libmnl0:amd64	1.0.5-3
 libmount1:amd64	2.41.5-0+deb13u1
@@ -1387,4 +1387,4 @@ xserver-xorg-video-vesa	1:2.6.0-2
 xserver-xorg-video-vmware	1:13.4.0-1
 xwayland	2:24.1.6-1
 xz-utils	5.8.1-1+deb13u2
-zlib1g:amd64	1:1.3.dfsg+really1.3.1-1+b1
+zlib1g:amd64	1:1.3.dfsg+really1.3.1-1+deb13u1

@@ -1,14 +1,20 @@
-kde-standard
-plasma-workspace
+# KDE Plasma Minimal Desktop Shell
 plasma-desktop
+plasma-workspace
 plasma-pa
 plasma-nm
 sddm
+kde-config-sddm
 bluedevil
 konsole
 dolphin
-ufw
-gufw
+
+# Boot Branding Architecture
 plymouth
 plymouth-themes
-plymouth-theme-breeze
+
+# Core System GUI Frameworks
+ufw
+gufw
+fastfetch
+libxcb-cursor0

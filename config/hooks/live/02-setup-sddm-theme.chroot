@@ -1,0 +1,9 @@
+#!/bin/sh
+set -e
+
+echo "🔧 Enforcing Shadow OS SDDM Breeze Theme Layout..."
+
+# Ensure the sddm user is part of the video group to prevent rendering blocks
+if id sddm >/dev/null 2>&1; then
+    usermod -aG video sddm || true
+fi

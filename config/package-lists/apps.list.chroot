@@ -1,22 +1,14 @@
-# Internet
+# Internet & Productivity
 firefox-esr
 thunderbird
-
-# Office
 libreoffice
 
-# Media
+# Media & Viewing
 vlc
 gwenview
 elisa
-
-# Utilities
 okular
 ark
 kde-spectacle
 kcalc
 filelight
-
-# System tools
-# NOTE: gufw (and ufw) live in desktop.list.chroot - do not duplicate them here.
-discover

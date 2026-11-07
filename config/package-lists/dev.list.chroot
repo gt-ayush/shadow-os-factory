@@ -1,17 +1,20 @@
-# Networking & security
+# Networking Analysis & System Security
 wireshark
 nmap
-dnsutils
-net-tools
+fail2ban
+apparmor
+apparmor-utils
 
-# Debugging
-gdb
-strace
-hexer
-
-# Development
+# Development Suite & Toolchains
 build-essential
 golang-go
 python3-pip
+python3-venv
+pipx
 libssl-dev
 linux-headers-amd64
+
+# Advanced Debugging Tracers
+gdb
+strace
+hexer
