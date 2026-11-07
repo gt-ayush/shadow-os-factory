@@ -269,6 +269,65 @@ Shadow OS ISO
 - Reproducible builds
 
 ---
+## Container Build Environment
+
+To isolate the build dependencies and safely run `live-build` on non-Debian host systems (such as Arch Linux), a privileged Podman container is utilized. This prevents host loop-device pollution and ensures a repeatable build tree.
+
+### 1. Launching the Builder Container
+
+Run the following command from the root of the `shadow-os-factory` repository directory to spin up the compilation workspace:
+
+```bash
+podman run -it --name shadow-os-factory \
+  --privileged \
+  --cap-add=ALL \
+  -v /dev:/dev \
+  -v .:/build:z \
+  docker.io/library/debian:stable-slim /bin/bash
+```
+
+#### Configuration Breakdown:
+* `--privileged` & `--cap-add=ALL`: Grants the internal container engine rights to safely trigger chroot layers, loop interfaces, and internal mount tasks.
+* -v /dev:/dev: Bridges physical hardware loop vectors directly, allowing `live-build` to dynamically format and pack the raw architecture structure layers.
+* -v .:/build:z: Mounts the specific `shadow-os-factory` source repository directory to the container path `/build` while maintaining strict SELinux contextual permissions (`:z`).
+
+---
+
+### 2. Compiling the OS Inside the Container
+
+Once dropped into the shell environment prompt, shift to the build directory volume, install target image toolchains, and kick off the compilation framework:
+
+```bash
+# Navigate to the isolated project mount space
+cd /build
+
+# Update container environment definitions and install compilation nodes
+apt-get update && apt-get install -y \
+  live-build \
+  debootstrap \
+  xorriso \
+  squashfs-tools \
+  cpio \
+  sudo \
+  tree
+
+# Make your deployment engine automation script executable and trigger the run
+chmod +x build.sh
+./build.sh
+```
+
+---
+
+### 3. Re-entering an Existing Container Instance
+
+If you exit the container shell layout and want to resume the current working context without redeploying definitions or tools from scratch, map the tracking system run state:
+
+```bash
+podman start shadow-os-factory
+podman exec -it shadow-os-factory /bin/bash
+```
+
+---
 
 # Building Shadow OS
 

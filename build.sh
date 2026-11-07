@@ -34,12 +34,6 @@ export DEBIAN_FRONTEND=noninteractive
 ionice -c2 -n7 -p $$ >/dev/null 2>&1 || true
 
 # ==============================
-# 🔓 PREVENT SLEEP (CRITICAL)
-# ==============================
-echo "🔓 Disabling sleep..."
-sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-
-# ==============================
 # 🧹 CLEAN
 # ==============================
 echo "🧹 Cleaning previous build..."
@@ -84,14 +78,3 @@ else
     echo "❌ ERROR: Build failed. Check shadow-build.log"
 fi
 
-# ==============================
-# 🔒 RESTORE SYSTEM
-# ==============================
-echo "🔒 Restoring system state..."
-sudo systemctl unmask sleep.target suspend.target hibernate.target hybrid-sleep.target
-
-# ==============================
-# ⛔ SHUTDOWN
-# ==============================
-echo "🛑 Shutting down..."
-sudo shutdown -h now
