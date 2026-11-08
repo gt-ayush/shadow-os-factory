@@ -1,0 +1,8 @@
+# Firmware (explicit; --firmware-chroot is disabled to avoid b43-installer
+# postinst network downloads in non-interactive builds)
+firmware-linux-free
+wireless-regdb
+bluez-firmware
+iw
+ethtool
+

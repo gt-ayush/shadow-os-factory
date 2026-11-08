@@ -1,0 +1,17 @@
+# Internet & productivity
+# Zen Browser installed via config/hooks/normal/0500-install-zen-browser.hook.chroot
+# (upstream provides tar.xz/AppImage; no Debian .deb repo at time of writing)
+thunderbird
+libreoffice
+libreoffice-plasma
+
+# Media & utilities
+vlc
+elisa
+okular
+kde-spectacle
+kcalc
+gparted
+partitionmanager
+synaptic
+

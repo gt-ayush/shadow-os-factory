@@ -1,0 +1,41 @@
+# KDE Plasma (minimal session) + SDDM
+plasma-desktop
+plasma-workspace
+plasma-pa
+plasma-nm
+plasma-discover
+sddm
+kde-config-sddm
+bluedevil
+powerdevil
+konsole
+dolphin
+ark
+gwenview
+kate
+
+# Display/session helpers & portals
+xserver-xorg
+xwayland
+xdg-user-dirs
+xdg-utils
+xdg-desktop-portal
+xdg-desktop-portal-kde
+libxcb-cursor0
+fonts-dejavu-core
+fonts-noto-core
+fonts-noto-color-emoji
+gvfs
+gvfs-backends
+polkit-kde-agent-1
+kio-extras
+ffmpegthumbs
+filelight
+
+
+# Boot splash & desktop utilities
+plymouth
+plymouth-themes
+ufw
+gufw
+fastfetch

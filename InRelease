@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Content-Length: 140421
+Server: Apache
+X-Content-Type-Options: nosniff
+X-Frame-Options: sameorigin
+Referrer-Policy: no-referrer
+X-Xss-Protection: 1
+Permissions-Policy: interest-cohort=()
+Last-Modified: Sat, 12 Sep 2026 07:59:10 GMT
+ETag: "22485-65b4493787114"
+X-Clacks-Overhead: GNU Terry Pratchett
+Cache-Control: public, max-age=120
+Backend: 4qpvL1tJyeV1P6Tmf0Lj8g--F_accum_debian_backend_mirrors_debian_org
+Via: 1.1 varnish, 1.1 varnish, HTTP/1.1 forward.http.proxy:3128
+Accept-Ranges: bytes
+Date: Sun, 08 Nov 2026 19:19:03 GMT
+Age: 11
+X-Served-By: cache-ams-eham8680050-AMS, cache-maa10226-MAA
+X-Cache: HIT, HIT
+X-Cache-Hits: 889013, 1
+X-Timer: S1794165543.999669,VS0,VE1
+Connection: keep-alive
+

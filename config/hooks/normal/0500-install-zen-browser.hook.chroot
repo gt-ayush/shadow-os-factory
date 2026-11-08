@@ -1,0 +1,88 @@
+#!/bin/sh
+set -eu
+
+# Install Zen Browser (third-party; no official Debian package).
+# Override with ZEN_BROWSER_URL to pin a specific release asset.
+# Runs as a normal chroot hook (after packages are installed).
+
+ZEN_BROWSER_URL_DEFAULT_AMD64="https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-x86_64.tar.xz"
+ZEN_BROWSER_URL_DEFAULT_ARM64="https://github.com/zen-browser/desktop/releases/latest/download/zen.linux-aarch64.tar.xz"
+ZEN_BROWSER_URL="${ZEN_BROWSER_URL:-}"
+INSTALL_DIR="/opt/zen-browser"
+BIN_LINK="/usr/local/bin/zen-browser"
+DESKTOP_FILE="/usr/share/applications/zen-browser.desktop"
+
+arch="$(dpkg --print-architecture 2>/dev/null || echo amd64)"
+if [ -z "$ZEN_BROWSER_URL" ]; then
+  case "$arch" in
+    amd64) ZEN_BROWSER_URL="$ZEN_BROWSER_URL_DEFAULT_AMD64" ;;
+    arm64) ZEN_BROWSER_URL="$ZEN_BROWSER_URL_DEFAULT_ARM64" ;;
+    *)
+      echo "W: Zen Browser install hook: unsupported arch '${arch}', skipping" >&2
+      exit 0
+      ;;
+  esac
+fi
+
+echo "I: Installing Zen Browser (${arch}) from ${ZEN_BROWSER_URL}"
+
+if ! command -v curl >/dev/null 2>&1 && ! command -v wget >/dev/null 2>&1; then
+  echo "W: curl/wget not available; skipping Zen Browser install" >&2
+  exit 0
+fi
+
+tmp="$(mktemp -d)"
+cleanup() { rm -rf "$tmp"; }
+trap cleanup EXIT INT TERM
+
+archive="$tmp/zen.tar.xz"
+if command -v curl >/dev/null 2>&1; then
+  curl -fsSL --retry 3 -o "$archive" "$ZEN_BROWSER_URL"
+else
+  wget -qO "$archive" "$ZEN_BROWSER_URL"
+fi
+
+rm -rf "$INSTALL_DIR"
+mkdir -p "$INSTALL_DIR" /usr/local/bin /usr/share/applications
+tar -xJf "$archive" -C "$INSTALL_DIR" --strip-components=1
+
+# Find launcher
+launcher=""
+for c in "$INSTALL_DIR/zen" "$INSTALL_DIR/zen-browser" "$INSTALL_DIR/zen-bin"; do
+  if [ -x "$c" ]; then launcher="$c"; break; fi
+done
+if [ -z "$launcher" ]; then
+  launcher="$(find "$INSTALL_DIR" -maxdepth 2 -type f \( -name 'zen' -o -name 'zen-browser' \) | head -n1 || true)"
+fi
+if [ -z "$launcher" ]; then
+  echo "E: Zen Browser launcher not found in ${INSTALL_DIR}" >&2
+  find "$INSTALL_DIR" -maxdepth 2 | head -n 30 >&2 || true
+  exit 1
+fi
+chmod +x "$launcher" || true
+ln -sf "$launcher" "$BIN_LINK"
+ln -sf "$launcher" /usr/local/bin/zen || true
+
+# Desktop entry (use bundled icon if present)
+icon=""
+for i in "$INSTALL_DIR/browser/chrome/icons/default/default128.png" "$INSTALL_DIR/icons/zen.png" "$INSTALL_DIR/zen.png"; do
+  if [ -f "$i" ]; then icon="$i"; break; fi
+done
+[ -n "$icon" ] || icon="web-browser"
+
+cat > "$DESKTOP_FILE" <<EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Zen Browser
+Comment=Experience tranquillity while browsing the web
+Exec=${BIN_LINK} %u
+Icon=${icon}
+Terminal=false
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;application/xml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+StartupWMClass=zen
+EOF
+
+echo "I: Zen Browser installed to ${INSTALL_DIR}"

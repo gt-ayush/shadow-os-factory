@@ -1,81 +1,98 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+# Shadow OS - live-build wrapper (Debian Live Manual workflow)
+# Usage:
+#   ./build.sh            # clean (preserve cache) + config + build
+#   ./build.sh --purge    # full clean (remove cache) + config + build
 
-echo "🚀 Shadow OS Build Started"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
 
-# ==============================
-# 🛡️ SAFETY CHECKS
-# ==============================
-# ENFORCE ROOT USER REQUIREMENT
-if [ "$(id -u)" -ne 0 ]; then
-    echo "❌ ERROR: This script MUST be run as root (or inside the root build container)."
-    exit 1
+IMAGE_BASENAME="${IMAGE_BASENAME:-shadow-os}"
+IMAGE_VERSION="${IMAGE_VERSION:-$(date +%Y%m%d)}"
+LOG_FILE="${LOG_FILE:-shadow-build.log}"
+
+echo "==> Shadow OS build started (${IMAGE_BASENAME}-${IMAGE_VERSION})"
+
+# --- checks ---
+if ! command -v lb >/dev/null 2>&1; then
+  echo "ERROR: live-build (lb) not found in PATH." >&2
+  exit 1
 fi
 
-if ! command -v lb >/dev/null; then
-    echo "❌ live-build not installed."
-    exit 1
+if [ "${EUID:-$(id -u)}" -ne 0 ]; then
+  echo "WARN: not running as root; live-build usually needs root or a properly privileged container." >&2
 fi
 
-# ==============================
-# 🧠 LOW RAM SETTINGS
-# ==============================
-export TMPDIR=/tmp
+# --- environment (low-resource friendly) ---
+export TMPDIR="${TMPDIR:-/tmp}"
 mkdir -p "$TMPDIR"
-
-# Reduce CPU → less RAM pressure
-export MAKEFLAGS="-j1"
-
-# Non-interactive debconf so apt/dpkg never block on a prompt.
+export MAKEFLAGS="${MAKEFLAGS:--j1}"
 export DEBIAN_FRONTEND=noninteractive
+ionice -c2 -n7 -p "$$" >/dev/null 2>&1 || true
 
-# Reduce I/O priority (keeps system responsive)
-ionice -c2 -n7 -p $$ >/dev/null 2>&1 || true
-
-# ==============================
-# 🧹 CLEAN CONFIGURATION
-# ==============================
-if [ "$1" = "--purge" ]; then
-    echo "🧹 [PURGE MODE] Deep cleaning all previous build files and cached packages..."
-    lb clean --purge
+# --- clean ---
+if [ "${1:-}" = "--purge" ]; then
+  echo "==> Purge clean (removes cache/build state)"
+  lb clean --purge || true
 else
-    echo "🧹 [STANDARD MODE] Performing quick clean (caching preserved)..."
-    lb clean
+  echo "==> Clean (preserving cache where possible)"
+  lb clean || true
 fi
 
-# ==============================
-# ⚙️ CONFIG
-# ==============================
-echo "⚙️ Configuring live-build..."
-
+# --- config (documentation-aligned) ---
+# - boot=live components: required for live-boot/live-config runtime behavior
+# - --firmware-chroot false: avoids b43-installer/legacy postinst network downloads
+# - --apt-recommends true: keep recommends as requested (larger image)
+echo "==> Configuring live-build"
 lb config \
-    --mode debian \
-    --system live \
-    --distribution trixie \
-    --archive-areas "main contrib non-free non-free-firmware" \
-    --linux-flavours amd64 \
-    --debian-installer live \
-    --binary-images iso-hybrid \
-    --memtest memtest86+ \
-    --apt-recommends true \
-    --backports true \
-    --firmware-chroot false
+  --mode debian \
+  --system live \
+  --distribution trixie \
+  --archive-areas "main contrib non-free non-free-firmware" \
+  --architectures amd64 \
+  --linux-flavours amd64 \
+  --debian-installer live \
+  --binary-images iso-hybrid \
+  --bootloader "grub-efi,grub-pc" \
+  --bootappend-live "boot=live components quiet splash" \
+  --bootappend-live-failsafe "boot=live components memtest noapic noapm nodma nomce nosmp nosplash vga=788" \
+  --memtest memtest86+ \
+  --apt-recommends true \
+  --apt-indices true \
+  --security true \
+  --updates true \
+  --backports true \
+  --firmware-chroot false \
+  --firmware-binary true \
+  --checksums "sha256" \
+  --cache true
 
-# ==============================
-# 🏗️ BUILD
-# ==============================
-echo "🏗️ Building ISO..."
-
-# Avoid RAM-heavy tee
-lb build > shadow-build.log 2>&1
-
-# ==============================
-# ✅ RESULT
-# ==============================
-if [ -f "live-image-amd64.hybrid.iso" ]; then
-    mv live-image-amd64.hybrid.iso "shadow-os-alpha-v0.1.6.iso"
-    echo "✅ SUCCESS: ISO created!"
+# --- build ---
+echo "==> Building image (log: ${LOG_FILE})"
+if lb build >"${LOG_FILE}" 2>&1; then
+  :
 else
-    echo "❌ ERROR: Build failed. Check shadow-build.log"
+  status=$?
+  echo "ERROR: lb build failed (exit ${status}). See ${LOG_FILE}" >&2
+  tail -n 60 "${LOG_FILE}" >&2 || true
+  exit "${status}"
+fi
+
+# --- result ---
+shopt -s nullglob
+isos=( live-image-*.hybrid.iso live-image-*.iso *.hybrid.iso )
+shopt -u nullglob
+if [ "${#isos[@]}" -gt 0 ]; then
+  src="${isos[0]}"
+  dest="${IMAGE_BASENAME}-${IMAGE_VERSION}-amd64.hybrid.iso"
+  if [ "$src" != "$dest" ]; then
+    mv -f -- "$src" "$dest"
+  fi
+  echo "==> SUCCESS: ${dest}"
+  echo "==> Log: ${LOG_FILE}"
+else
+  echo "ERROR: build completed but no ISO was found. Check ${LOG_FILE}" >&2
+  exit 1
 fi

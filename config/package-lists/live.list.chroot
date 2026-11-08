@@ -1,0 +1,8 @@
+# Live system (required by live-boot/live-config)
+live-boot
+live-config
+live-config-systemd
+systemd-sysv
+user-setup
+sudo
+dbus-user-session
