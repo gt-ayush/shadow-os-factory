@@ -1,4 +1,0 @@
-#!/bin/sh
-
-chown -R "$LIVE_USERNAME:$LIVE_USERNAME" "/home/$LIVE_USERNAME"
-chmod -R u+rwX "/home/$LIVE_USERNAME"
