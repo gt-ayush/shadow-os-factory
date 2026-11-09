@@ -1,0 +1,94 @@
+#!/usr/bin/perl -w
+# Patched for live-build: non-fatal on aspell hash errors; safe without Debconf module.
+use strict;
+
+my $has_debconf = 0;
+eval {
+  require Debconf::Client::ConfModule;
+  Debconf::Client::ConfModule->import(':all');
+  $has_debconf = 1;
+};
+if (!$has_debconf) {
+  no strict 'refs';
+  *subst = sub { }; *fset = sub { }; *title = sub { }; *input = sub { }; *go = sub { 0 };
+}
+
+my ($debug, $dry_run, $force, $triggered);
+my $usrlibdir   = "/usr/lib/aspell";
+my $usrsharedir = "/usr/share/aspell";
+my $varlibdir   = "/var/lib/aspell";
+my $datadir     = $usrlibdir;
+my $program     = "aspell-autobuildhash";
+
+sub usage { print STDERR "\nUsage:\taspell-autobuildhash [options]\n"; }
+sub debugprint { print STDERR "@_\n" if $debug; }
+sub mymessage {
+  my ($lang, $message) = (shift, join(" ", @_));
+  my $question = "dictionaries-common/ispell-autobuildhash-message";
+  eval {
+    subst($question,"xxpell","aspell"); subst($question,"XXpell","Aspell");
+    subst($question,"hashfile",$lang); subst($question,"errormsg",$message);
+    fset($question,"seen","false"); title("dictionaries-common: Running aspell-autobuildhash");
+    input("critical",$question); go();
+  };
+  print STDERR "$program: $message\n";
+}
+sub myerror { my ($lang, $msg) = (shift, join(" ", @_)); mymessage($lang, $msg); print STDERR "$program: continuing despite error for $lang\n"; return 0; }
+
+sub autorebuild {
+  my ($lang, $old_remove_data, $aspell_compat) = @_;
+  return myerror("aspell-autobuildhash","No argument passed") unless $lang;
+  $old_remove_data ||= {};
+  return myerror($lang, "aspell data dir $datadir does not exist") unless -d $datadir;
+  return myerror($lang, "aspell compatibility not found") unless $aspell_compat;
+
+  my @sublangs = ($lang);
+  my $langsfile = "$usrsharedir/$lang.contents";
+  if (-r $langsfile && open(my $LF, "< $langsfile")) {
+    @sublangs = ();
+    while (<$LF>) { chomp; next if /^\s*#/ || /^\s*$/; push @sublangs, $_; }
+    close $LF;
+    @sublangs = ($lang) unless @sublangs;
+  }
+
+  print STDERR "aspell-autobuildhash: processing: $lang [", join(",",@sublangs), "].\n";
+  my @inputs = ();
+  for my $s (@sublangs) { my $cwl = "$usrsharedir/$s.cwl.gz"; push @inputs, $cwl if -r $cwl; }
+  my $unpack = @inputs ? ("zcat " . join(" ", @inputs)) : (-r "$usrsharedir/$lang.cwl.gz" ? "zcat $usrsharedir/$lang.cwl.gz" : "true");
+  my $hash = "$varlibdir/$lang.rws";
+  my $command = "$unpack | aspell --per-conf=/dev/null --local-data-dir=$datadir --lang=$lang create master $hash 2>&1";
+  debugprint($command);
+  if ($dry_run) { print STDERR "[dry-run] $command\n"; }
+  else {
+    my $out = `$command`; my $rc = $? >> 8;
+    if ($rc != 0) { mymessage($lang, "Failed to build aspell hash $hash (rc=$rc): $out"); print STDERR "$program: warning: skipping $lang hash build\n"; }
+    elsif ($debug) { print STDERR "$program: built $hash\n"; }
+  }
+  my %new = (); $new{$_} = $aspell_compat for @sublangs; return \%new;
+}
+
+sub get_aspell_compat {
+  my $f = "/usr/share/aspell/aspell.compat"; return undef unless -e $f;
+  open(my $C, $f) or return undef; chomp(my $v = <$C>); close $C; return $v;
+}
+sub dico_activate_trigger {
+  my $name = shift; return 0 unless -x "/usr/share/dictionaries-common/trigger.activate";
+  return system("/usr/share/dictionaries-common/trigger.activate", $name) == 0;
+}
+
+for (@ARGV) {
+  if (/^--debug$/) { $debug=1; next } if (/^--dry-run$/) { $dry_run=1; next }
+  if (/^--force$/) { $force=1; next } if (/^--triggered$/) { $triggered=1; next }
+  if (/^--help$/||/^-h$/) { usage(); exit 0 } usage(); exit 1;
+}
+
+my $aspell_compat = get_aspell_compat();
+unless ($aspell_compat) { print STDERR "$program: aspell compatibility not found; skipping.\n"; exit 0; }
+exit 0 if dico_activate_trigger("aspell-autobuildhash");
+
+my $jargondir = "/var/lib/dictionaries-common/aspell";
+if (-d $jargondir && opendir(my $D, $jargondir)) {
+  my @entries = sort grep { $_ ne '.' && $_ ne '..' } readdir($D); closedir($D);
+  for my $e (@entries) { next unless -f "$jargondir/$e"; eval { autorebuild($e, {}, $aspell_compat) }; print STDERR "$program: warning: $e: $@\n" if $@; }
+}
+exit 0;
