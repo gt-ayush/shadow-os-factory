@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Shadow OS Set Wallpaper
+Exec=/usr/local/bin/shadow-set-wallpaper
+Icon=preferences-desktop-wallpaper
+Terminal=false
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-AutostartScript=true

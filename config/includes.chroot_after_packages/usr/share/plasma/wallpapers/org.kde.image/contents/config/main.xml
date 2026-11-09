@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+                          http://www.kde.org/standards/kcfg/1.0/kcfg.xsd">
+  <kcfgfile name=""/>
+  <group name="General">
+    <entry name="Image" type="String">
+      <label>Wallpaper image path</label>
+      <default>file:///usr/share/wallpapers/shadow/Firewatch.jpg</default>
+    </entry>
+    <entry name="PreviewImage" type="String">
+      <label>Wallpaper preview image path</label>
+      <default>file:///usr/share/wallpapers/shadow/Firewatch.jpg</default>
+    </entry>
+    <entry name="SlidePaths" type="StringList">
+      <label>Slideshow folders</label>
+      <default>/usr/share/wallpapers/shadow</default>
+    </entry>
+  </group>
+</kcfg>

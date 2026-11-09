@@ -1,0 +1,29 @@
+#!/bin/sh
+# Set Shadow OS default wallpaper once per user session profile.
+set -eu
+
+MARKER="${XDG_CONFIG_HOME:-$HOME/.config}/shadow-wallpaper-applied"
+WALLPAPER="/usr/share/wallpapers/shadow/Firewatch.jpg"
+
+[ -f "$MARKER" ] && exit 0
+[ -f "$WALLPAPER" ] || exit 0
+
+# Wait briefly for Plasma shell/session to be ready.
+i=0
+while [ "$i" -lt 30 ]; do
+  if command -v qdbus6 >/dev/null 2>&1 && qdbus6 org.kde.plasmashell /PlasmaShell >/dev/null 2>&1; then
+    break
+  fi
+  if command -v qdbus >/dev/null 2>&1 && qdbus org.kde.plasmashell /PlasmaShell >/dev/null 2>&1; then
+    break
+  fi
+  i=$((i + 1))
+  sleep 1
+done
+
+if command -v plasma-apply-wallpaperimage >/dev/null 2>&1; then
+  plasma-apply-wallpaperimage "$WALLPAPER" || true
+fi
+
+mkdir -p "$(dirname "$MARKER")"
+touch "$MARKER"

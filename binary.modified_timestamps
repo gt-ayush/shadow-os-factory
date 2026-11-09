@@ -504,7 +504,7 @@ f binary/sha256sum.README
 d binary/live
 f binary/live/filesystem.packages
 f binary/live/filesystem.squashfs
-f binary/live/initrd.img-6.12.115+deb13.1-amd64
+f binary/live/initrd.img-6.12.116+deb13-amd64
 l binary/debian
 f binary/sha256sum.txt
 d binary/tools
