@@ -1,9 +1,9 @@
 NAME="Shadow OS"
-VERSION="V0.1.6-Alpha (Trixie)"
+VERSION="V0.1.6-Alpha (Debian Trixie)"
 ID=shadow
 ID_LIKE=debian
-PRETTY_NAME="Shadow-OS-V0.1.6-Alpha"
-VERSION_ID="1.0"
+PRETTY_NAME="Shadow OS V0.1.6-Alpha"
+VERSION_ID="0.1.6"
 VERSION_CODENAME=shadow
 BUILD_ID="2026.04"
 

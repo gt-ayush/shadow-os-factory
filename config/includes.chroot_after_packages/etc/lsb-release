@@ -1,0 +1,4 @@
+DISTRIB_ID=shadow
+DISTRIB_RELEASE=V0.1.6-Alpha
+DISTRIB_CODENAME=shadow
+DISTRIB_DESCRIPTION="Shadow OS V0.1.6-Alpha (Debian Trixie)"
