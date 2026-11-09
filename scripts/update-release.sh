@@ -36,8 +36,21 @@ prompt_default() {
   printf -v "$var" '%s' "${value:-$default}"
 }
 
+resolve_build_id() {
+  local value="$1"
+  case "$value" in
+    ''|auto|AUTO|timestamp)
+      date '+%Y-%m-%dT%H:%M:%S%z'
+      ;;
+    *)
+      printf '%s' "$value"
+      ;;
+  esac
+}
+
 echo "==> Shadow OS release updater"
 echo "Current: version=${SHADOW_VERSION} channel=${SHADOW_CHANNEL} build=${SHADOW_BUILD_ID}"
+echo "Tip: set Build ID to 'auto' for current timestamp with timezone, or enter a custom value."
 echo
 
 while true; do
@@ -48,8 +61,10 @@ while true; do
 done
 
 prompt_default NEW_VERSION "Version (e.g. 0.1.6)" "${SHADOW_VERSION}"
-prompt_default NEW_BUILD "Build ID (e.g. 2026.04)" "${SHADOW_BUILD_ID}"
+prompt_default NEW_BUILD "Build ID (auto = timestamp+timezone, or custom)" "${SHADOW_BUILD_ID}"
 prompt_default NEW_CODENAME "Version codename" "${SHADOW_VERSION_CODENAME}"
+
+RESOLVED_BUILD="$(resolve_build_id "$NEW_BUILD")"
 
 CHANNEL_TITLE="$(title_case_channel "$NEW_CHANNEL")"
 if [ "$NEW_CHANNEL" = "stable" ]; then
@@ -62,7 +77,7 @@ else
   VERSION_DISPLAY="V${NEW_VERSION}-${CHANNEL_TITLE} (${SHADOW_BASE})"
 fi
 
-# Update release.env
+# Update release.env (preserve 'auto' if chosen; resolved timestamp is written to branding files)
 tmp="$(mktemp)"
 awk -v v="$NEW_VERSION" -v c="$NEW_CHANNEL" -v b="$NEW_BUILD" -v n="$NEW_CODENAME" '
   /^SHADOW_VERSION=/ { print "SHADOW_VERSION=\"" v "\""; next }
@@ -81,7 +96,7 @@ ID_LIKE=debian
 PRETTY_NAME="${SHADOW_NAME} ${PRETTY_TAG}"
 VERSION_ID="${NEW_VERSION}"
 VERSION_CODENAME=${NEW_CODENAME}
-BUILD_ID="${NEW_BUILD}"
+BUILD_ID="${RESOLVED_BUILD}"
 
 HOME_URL="${SHADOW_HOME_URL}"
 SUPPORT_URL="${SHADOW_SUPPORT_URL}"
@@ -108,7 +123,7 @@ Base: ${SHADOW_BASE}
 Kernel: Linux 6.x
 Desktop: KDE Plasma 6
 
-Build: ${NEW_BUILD}
+Build: ${RESOLVED_BUILD}
 Architecture: ${SHADOW_ARCH}
 
 Maintainer: ${SHADOW_MAINTAINER}
@@ -121,4 +136,4 @@ echo " - config/includes.chroot_after_packages/etc/os-release"
 echo " - config/includes.chroot_after_packages/etc/lsb-release"
 echo " - config/includes.chroot_after_packages/etc/shadow-release"
 echo
-echo "Release: ${SHADOW_NAME} ${RELEASE_TAG} (build ${NEW_BUILD})"
+echo "Release: ${SHADOW_NAME} ${RELEASE_TAG} (build ${RESOLVED_BUILD}${NEW_BUILD:+; release.env: ${NEW_BUILD}})"

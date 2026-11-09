@@ -5,7 +5,7 @@ ID_LIKE=debian
 PRETTY_NAME="Shadow OS V0.1.6-Alpha"
 VERSION_ID="0.1.6"
 VERSION_CODENAME=shadow
-BUILD_ID="2026.04"
+BUILD_ID="2026-11-09T20:48:29+0530"
 
 HOME_URL="https://shadow-os.x"
 SUPPORT_URL="https://shadow-os.x/support"
