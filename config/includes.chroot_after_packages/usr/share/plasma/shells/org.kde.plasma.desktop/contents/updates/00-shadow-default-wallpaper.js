@@ -3,7 +3,7 @@
 // Plasma may regenerate with new activity/containment IDs on first boot.
 
 (function () {
-  var image = "file:///usr/share/wallpapers/shadow/Firewatch.jpg";
+  var image = "file:///usr/share/wallpapers/shadow/Peak.jpg";
   var slidePaths = "/usr/share/wallpapers/shadow";
 
   var all = desktops();

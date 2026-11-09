@@ -3,7 +3,7 @@
 set -eu
 
 MARKER="${XDG_CONFIG_HOME:-$HOME/.config}/shadow-wallpaper-applied"
-WALLPAPER="/usr/share/wallpapers/shadow/Firewatch.jpg"
+WALLPAPER="/usr/share/wallpapers/shadow/Peak.jpg"
 
 [ -f "$MARKER" ] && exit 0
 [ -f "$WALLPAPER" ] || exit 0

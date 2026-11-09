@@ -22,8 +22,10 @@ DialogWidth=720
 
 
 [Containments][1][Wallpaper][org.kde.image][General]
-Image=/usr/share/wallpapers/shadow/Fire-Watch.jpg
-PreviewImage=/usr/share/wallpapers/shadow/Fire-Watch.jpg
+Image=file:///usr/share/wallpapers/shadow/Peak.jpg
+PreviewImage=file:///usr/share/wallpapers/shadow/Peak.jpg
+SlidePaths=/usr/share/wallpapers/shadow
+SlideshowMode=0
 
 [Containments][2]
 activityId=
