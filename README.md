@@ -26,6 +26,8 @@ Builds require network access to Debian mirrors and (with current config) to dow
 
 `live-build` performs chroot/bootstrap operations that typically require root privileges and can be sensitive to host configuration. Building inside a clean Debian **trixie** container is a good way to keep the host clean and make builds reproducible.
 
+> **Detailed guide:** see [`docs/CONTAINER.md`](docs/CONTAINER.md) for a comprehensive note (based on the container workflow from `main:readme.md`), including Podman/Docker usage, privileges/devices/SELinux mounts, dependency installation, re-entering containers, release/Zen build notes, and troubleshooting.
+
 `build.sh` is container-friendly (it warns but does not exit if not running as root).
 
 ### Docker / Podman example
