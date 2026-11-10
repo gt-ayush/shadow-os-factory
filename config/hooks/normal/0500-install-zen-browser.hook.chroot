@@ -35,11 +35,34 @@ tmp="$(mktemp -d)"
 cleanup() { rm -rf "$tmp"; }
 trap cleanup EXIT INT TERM
 
+ZEN_BROWSER_REQUIRED="${ZEN_BROWSER_REQUIRED:-true}"
 archive="$tmp/zen.tar.xz"
+download_ok=0
+
 if command -v curl >/dev/null 2>&1; then
-  curl -fsSL --retry 3 -o "$archive" "$ZEN_BROWSER_URL"
-else
-  wget -qO "$archive" "$ZEN_BROWSER_URL"
+  if curl -fL --retry 5 --retry-delay 2 --retry-all-errors --connect-timeout 30 --max-time 900 -o "$archive" "$ZEN_BROWSER_URL"; then
+    download_ok=1
+  else
+    echo "W: curl download failed for ${ZEN_BROWSER_URL}" >&2
+  fi
+fi
+
+if [ "$download_ok" -ne 1 ] && command -v wget >/dev/null 2>&1; then
+  if wget --tries=5 --waitretry=2 --timeout=30 -O "$archive" "$ZEN_BROWSER_URL"; then
+    download_ok=1
+  else
+    echo "W: wget download failed for ${ZEN_BROWSER_URL}" >&2
+  fi
+fi
+
+if [ "$download_ok" -ne 1 ]; then
+  echo "E: failed to download Zen Browser from ${ZEN_BROWSER_URL}" >&2
+  echo "I: set ZEN_BROWSER_URL to a mirror/local asset, or ZEN_BROWSER_REQUIRED=false to skip" >&2
+  if [ "$ZEN_BROWSER_REQUIRED" = "false" ]; then
+    echo "W: ZEN_BROWSER_REQUIRED=false; skipping Zen Browser install" >&2
+    exit 0
+  fi
+  exit 1
 fi
 
 rm -rf "$INSTALL_DIR"

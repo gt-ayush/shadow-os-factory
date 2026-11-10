@@ -522,4 +522,4 @@ f binary/install/install.bat
 f binary/md5sum.txt
 d binary/.disk
 f binary/.disk/mkisofs
-f live-image-amd64.hybrid.iso
+f shadow-os-amd64.hybrid.iso
